@@ -1,0 +1,135 @@
+.incident-workflow {
+  width: 100%; min-width: 0; color: var(--ops-text, #e9e9ee);
+  border: 1px solid #37343f; border-radius: 12px; background: #1b1a1f;
+  font-size: 13px; line-height: 1.65; overflow-wrap: anywhere;
+}
+.incident-workflow :is(button, summary) { font: inherit; }
+.incident-workflow button { cursor: pointer; }
+.incident-workflow button:disabled { cursor: not-allowed; opacity: .45; }
+.incident-workflow :is(button, summary):focus-visible { outline: 2px solid #c4afff; outline-offset: 3px; }
+.incident-workflow h2, .incident-workflow h3, .incident-workflow h4 { margin: 0; color: #eeebf4; font-weight: 550; line-height: 1.45; }
+.incident-workflow h2 { font-size: 17px; letter-spacing: -.02em; }
+.incident-workflow h3 { font-size: 14px; }
+.incident-workflow h4 { font-size: 12px; }
+.incident-workflow p { margin: 8px 0; }
+.incident-workflow-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 21px 24px 17px; }
+.incident-workflow-heading > div:first-child { display: grid; gap: 4px; }
+.incident-workflow-status { font-size: 11px; color: #aaa4b8; }
+.incident-workflow-status[data-status='running'] { color: #c9b8ff; }
+.incident-workflow-actions { display: flex; gap: 10px; align-items: center; }
+.incident-workflow-primary, .incident-workflow-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 12px; border: 1px solid #77648f; border-radius: 6px; padding: 8px 13px; color: #f2ebff; background: #473655; font-weight: 550 !important; }
+.incident-workflow-primary:not(:disabled):hover { background: #59436a; border-color: #ab8fca; }
+.incident-workflow-secondary { padding: 6px 11px; font-size: 12px !important; background: #29242f; border-color: #534660; }
+.incident-workflow-secondary:not(:disabled):hover { background: #37303f; }
+.incident-workflow-refresh { color: #b4acbf; background: transparent; border: 0; font-size: 22px !important; width: 30px; height: 32px; }
+.incident-workflow-overview { display: grid; gap: 13px; margin: 0; padding: 1px 24px 13px; }
+.incident-workflow-overview > div { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 16px; }
+.incident-workflow-overview dt { color: #a7a0b2; font-size: 11px; padding-top: 2px; }
+.incident-workflow-overview dd { margin: 0; color: #e0dce7; }
+.incident-workflow-overview > div:last-child dd { color: #d3c4ee; }
+.incident-workflow-source { padding: 4px 24px 14px; margin: 0 !important; font-size: 10px; color: #a7a1b1; font-variant-numeric: tabular-nums; }
+.incident-workflow-source > span { color: #c6bdd5; }
+.incident-workflow-tabs { display: flex; gap: 21px; padding: 0 24px; border-block: 1px solid #302d36; overflow-x: auto; }
+.incident-workflow-tabs > button { position: relative; padding: 12px 0; color: #a8a2b4; font-size: 12px; background: none; border: 0; white-space: nowrap; }
+.incident-workflow-tabs > button[aria-selected='true'] { color: #eee8fa; }
+.incident-workflow-tabs > button[aria-selected='true']::after { position: absolute; content: ''; height: 2px; background: #bea2ed; bottom: -1px; left: 0; right: 0; }
+.incident-workflow-tabs > button > span { color: #bcb2ce; margin-left: 7px; font-size: 10px; }
+.incident-workflow-tabpanel { padding: 20px 24px 24px; }
+.incident-workflow-note { color: #a7a0b2; font-size: 11px; }
+.incident-workflow > .incident-workflow-note { margin: 0 24px 14px; }
+.incident-workflow-empty { padding: 10px 24px 20px; color: #aaa3b6; font-size: 12px; }
+.incident-workflow-tabpanel > .incident-workflow-empty { padding: 10px 0; }
+.incident-workflow-error { color: #f2bdc4; padding: 10px 14px; background: #36262c; border: 1px solid #60404b; border-radius: 6px; margin: 0 24px 18px !important; font-size: 12px; }
+.incident-workflow-events { list-style: none; margin: 24px 0; padding: 0; display: grid; gap: 0; }
+.incident-workflow-earlier { margin-top: 17px; padding-bottom: 13px; border-bottom: 1px solid #39303f; }
+.incident-workflow-latest-heading { margin-top: 18px !important; font-size: 12px !important; color: #b7a9c9 !important; }
+.incident-workflow-events > li { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 24px; position: relative; padding: 0 0 18px; }
+.incident-workflow-events > li::before { content: ''; position: absolute; width: 1px; background: #49404f; top: 10px; bottom: -7px; left: 150px; }
+.incident-workflow-events > li:last-child::before { bottom: 18px; }
+.incident-workflow-event-time { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; color: #a39bac; text-align: right; font-size: 10px; padding-top: 10px; font-variant-numeric: tabular-nums; }
+.incident-workflow-event-time > span { color: #857c93; font-size: 9px; }
+.incident-workflow-events article { position: relative; padding: 14px 16px; border: 1px solid #34303b; background: #151417; border-radius: 8px; }
+.incident-workflow-events article::before { content: ''; position: absolute; width: 6px; height: 6px; border: 2px solid #1b1a1f; border-radius: 50%; background: #a791bf; top: 14px; left: -19px; }
+.incident-workflow-events article > p { color: #c6bfd1; font-size: 12px; }
+.incident-workflow-model-label { display: inline-block; margin-top: 7px; color: #ceb3a2; font-size: 10px; }
+.incident-workflow-events article > p.incident-workflow-note { color: #a79aaf; font-size: 10px; }
+.incident-workflow-hypothesis > p.incident-workflow-note { color: #a79aaf; font-size: 11px; }
+.incident-workflow-links { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; }
+.incident-workflow-links button { display: flex; gap: 6px; align-items: baseline; color: #cfc1e5; border: 1px solid #42374f; border-radius: 5px; background: #241f2b; padding: 4px 7px; font-size: 10px; text-align: left; max-width: 100%; }
+.incident-workflow-links button:hover { border-color: #8d70ad; background: #302638; }
+.incident-workflow-links button > span { color: #b7a0d0; flex-shrink: 0; font: 10px Consolas, monospace; }
+.incident-workflow-more-evidence { flex-basis: 100%; margin-top: 3px; }
+.incident-workflow-more-evidence > summary { font-size: 10px; }
+.incident-workflow-missing { color: #d6b89b; font-size: 10px; }
+.incident-workflow-text-button { border: 0; background: none; padding: 8px 0 0; color: #c5b1e1; font-size: 11px !important; text-align: left; }
+.incident-workflow-text-button:hover { color: #eee1ff; text-decoration: underline; }
+.incident-workflow-checks { margin-top: 23px; padding-top: 20px; border-top: 1px solid #37303f; }
+.incident-workflow-section-heading, .incident-workflow-check-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.incident-workflow-check { margin-top: 12px; padding: 16px; border: 1px solid #3b3343; border-radius: 8px; background: #211d26; }
+.incident-workflow-check > p { color: #bfb7cd; font-size: 12px; }
+.incident-workflow-tag { display: inline-flex; flex: 0 0 auto; padding: 2px 6px; border: 1px solid #4b4157; border-radius: 4px; color: #bbb0cb; font-size: 10px; line-height: 1.5; }
+.incident-workflow-tag[data-status='failed'], .incident-workflow-tag[data-status='weakened'] { color: #e0afb5; border-color: #674451; }
+.incident-workflow-tag[data-status='completed'], .incident-workflow-tag[data-status='supported'] { color: #cec3e5; border-color: #756586; }
+.incident-workflow-tag[data-status='running'] { color: #e0cbff; border-color: #9872b7; }
+.incident-workflow-check-result { padding-top: 8px; }
+.incident-workflow-check-result strong { color: #ddd2ee; font-weight: 550; }
+.incident-workflow-check-footer { display: flex; align-items: start; justify-content: space-between; gap: 18px; margin-top: 14px; }
+.incident-workflow-check-footer > details { min-width: 0; flex: 1; font-size: 11px; color: #aba0bb; }
+.incident-workflow summary { cursor: pointer; color: #c1afd8; font-size: 11px; }
+.incident-workflow summary:hover { color: #f0e4ff; }
+.incident-workflow-hypothesis { padding: 17px 0; border-bottom: 1px solid #39313f; }
+.incident-workflow-hypothesis:first-child { padding-top: 0; }
+.incident-workflow-hypothesis:last-child { border: 0; padding-bottom: 0; }
+.incident-workflow-hypothesis > h4 { margin-top: 15px; color: #a79cb7; font-weight: 500; font-size: 10px; }
+.incident-workflow-hypothesis > p { color: #cdc4d9; font-size: 12px; }
+.incident-workflow-evidence-list { display: grid; gap: 9px; }
+.incident-workflow-tabpanel > h3 + .incident-workflow-evidence-list { margin-top: 12px; }
+.incident-workflow-initial-evidence { border-top: 1px solid #403548; padding-top: 15px; margin-top: 20px; }
+.incident-workflow-initial-evidence > summary { margin-bottom: 12px; }
+.incident-workflow-evidence-list > button { display: grid; grid-template-columns: 30px minmax(0, 1fr) 16px; gap: 12px; padding: 14px; border: 1px solid #3c3345; border-radius: 7px; background: #201c25; color: #c2b3d6; text-align: left; }
+.incident-workflow-evidence-list > button:hover, .incident-workflow-evidence-list > button[aria-expanded='true'] { border-color: #9775b7; background: #2b2334; }
+.incident-workflow-evidence-list > button > span:nth-child(2) { display: grid; gap: 4px; color: #b8acc7; font-size: 11px; }
+.incident-workflow-evidence-list strong { color: #e0d6ec; font-size: 12px; font-weight: 550; }
+.incident-workflow-evidence-list small { color: #a492b7; font-size: 10px; }
+.incident-workflow-evidence-number { padding: 2px; font: 11px/1.6 Consolas, monospace; color: #bba1d6; }
+.incident-workflow-proof { margin: 0 24px 24px; padding: 20px; border: 1px solid #9d7bb5; border-radius: 9px; background: #24202b; outline: none; }
+.incident-workflow-proof-heading { display: flex; justify-content: space-between; align-items: start; gap: 16px; }
+.incident-workflow-proof-heading button { border: 0; color: #bdb0cf; background: none; font-size: 21px; line-height: 1; }
+.incident-workflow-proof > p { color: #d2c6df; font-size: 12px; }
+.incident-workflow-proof-id { display: block; margin-top: 5px; color: #a998bb; font-size: 10px; }
+.incident-workflow-metadata { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 20px; margin: 17px 0; font-size: 11px; }
+.incident-workflow-metadata dt { color: #a99aba; font-size: 10px; margin-bottom: 3px; }
+.incident-workflow-metadata dd { color: #d1c2df; margin: 0; }
+.incident-workflow-wide { grid-column: 1 / -1; }
+.incident-workflow-proof > details { padding-top: 11px; margin-top: 11px; border-top: 1px solid #473c53; }
+.incident-workflow pre { overflow: auto; max-height: 360px; padding: 12px; color: #c9b7dc; background: #18151d; border-radius: 5px; font: 10px/1.7 Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+.incident-workflow-limits { margin: 15px 0; color: #c2adca; font-size: 11px; }
+.incident-workflow ul { padding-inline-start: 20px; }
+.incident-workflow-recovery > h3 { margin-bottom: 12px; }
+.incident-workflow-recovery > p { color: #cbc0d9; font-size: 12px; }
+.incident-workflow-recovery > .incident-workflow-note { color: #a99cb7; font-size: 11px; }
+.incident-workflow-cause { margin: 22px 0 14px; padding: 15px; border-left: 2px solid #9f83bb; background: #25202c; }
+.incident-workflow-cause > p { color: #c4b6d5; font-size: 12px; }
+.incident-workflow-compact { margin: 0 0 24px; }
+.incident-workflow-compact .incident-workflow-heading { padding: 14px 16px; }
+.incident-workflow-compact .incident-workflow-heading h2 { font-size: 13px; }
+.incident-workflow-compact .incident-workflow-primary { padding: 6px 10px; font-size: 11px; }
+.incident-workflow-expand > summary { padding: 0 16px 13px; }
+.incident-workflow-expand[open] > summary { padding-bottom: 18px; }
+@media (max-width: 740px) {
+  .incident-workflow-heading { align-items: flex-start; padding: 17px; gap: 10px; }
+  .incident-workflow-actions { gap: 4px; }
+  .incident-workflow-primary { font-size: 11px !important; padding: 7px 10px; }
+  .incident-workflow-overview { padding-inline: 17px; }
+  .incident-workflow-overview > div { grid-template-columns: 1fr; gap: 3px; }
+  .incident-workflow-source, .incident-workflow-tabs { padding-inline: 17px; }
+  .incident-workflow-tabs { gap: 16px; }
+  .incident-workflow-tabpanel { padding: 17px; }
+  .incident-workflow-events > li { grid-template-columns: 1fr; gap: 8px; padding-left: 16px; }
+  .incident-workflow-events > li::before { left: 2px; }
+  .incident-workflow-event-time { flex-direction: row; text-align: left; align-items: center; justify-content: space-between; padding: 0; }
+  .incident-workflow-events article::before { left: -20px; }
+  .incident-workflow-proof { margin-inline: 17px; padding: 15px; }
+  .incident-workflow-metadata { grid-template-columns: 1fr; }
+  .incident-workflow-check-heading { flex-direction: column; gap: 7px; }
+}

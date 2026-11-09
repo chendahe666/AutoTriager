@@ -1,0 +1,97 @@
+.monitoring-console{--monitor-blue:#0765b5;--monitor-risk:#ad6200;--monitor-alert:#a93f30;--monitor-muted:#53677a;max-width:1320px}
+.monitoring-header{display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:16px;margin-bottom:16px}
+.monitoring-header h1{margin:8px 0 4px}.monitoring-header p{margin:0;color:var(--monitor-muted);font-size:13px}
+.monitoring-mode{display:inline-block;background:#edf4fa;color:#325f85;font-size:11px;font-weight:700;padding:4px 8px;border:1px solid #d1e2ef;border-radius:3px}
+.monitoring-live{background:#eaf6ee;color:#256344;border-color:#c9e6d5}
+.monitoring-controls{display:flex;gap:8px;align-items:end;flex-wrap:wrap}
+.monitoring-controls label{display:grid;gap:4px;font-size:11px;font-weight:600;color:var(--monitor-muted)}
+.monitoring-controls select{min-height:32px;min-width:100px;padding:4px 8px;border:1px solid #9eaab7;border-radius:5px;background:white;color:var(--ink)}
+.monitoring-values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0}
+.monitoring-values>div,.monitoring-panel,.monitoring-validation{background:white;border:1px solid var(--line);border-radius:6px}
+.monitoring-values>div{display:grid;gap:4px;padding:13px 16px}.monitoring-values span,.monitoring-values small{font-size:11px;color:var(--monitor-muted)}
+.monitoring-values strong{font-size:24px;line-height:1.2;font-variant-numeric:tabular-nums}
+.monitoring-panel{padding:15px 16px}.monitoring-panel-head{display:flex;gap:8px;justify-content:space-between;align-items:baseline}
+.monitoring-panel-head span{font-size:11px;color:var(--monitor-muted)}
+.monitoring-chart{width:100%;height:auto;display:block;max-height:330px;overflow:visible}
+.monitoring-chart text{font:10px Consolas,monospace;fill:var(--monitor-muted)}
+.monitoring-chart-grid{stroke:var(--monitor-grid,#e1e9ef)}
+.monitoring-observed,.monitoring-forecast{stroke-width:2.5;vector-effect:non-scaling-stroke}.monitoring-observed{stroke:var(--monitor-blue)}
+.monitoring-observed-dot{fill:var(--monitor-blue)}.monitoring-forecast{stroke:var(--monitor-risk);stroke-dasharray:6 4}.monitoring-forecast-dot{fill:var(--monitor-risk)}
+.monitoring-threshold{stroke:var(--monitor-alert);stroke-dasharray:2 4;vector-effect:non-scaling-stroke}
+.monitoring-legend{display:flex;flex-wrap:wrap;gap:12px;padding:0;margin:2px 0 0;list-style:none;color:var(--monitor-muted);font-size:11px}
+.monitoring-legend li::before{content:'';display:inline-block;width:15px;margin-right:6px;vertical-align:middle;border-top:2px solid var(--monitor-blue)}
+.monitoring-legend li:nth-child(2)::before{border-top:2px dashed var(--monitor-risk)}.monitoring-legend li:nth-child(3)::before{border-top:2px dotted var(--monitor-alert)}
+.monitoring-validation{margin:12px 0;padding:10px 14px}.monitoring-validation summary{color:#325f85;font-size:12px;font-weight:600}
+.monitoring-validation p{font-size:11px;color:var(--monitor-muted);margin:8px 0 0}.monitoring-table-wrap{overflow-x:auto}
+.monitoring-validation table{font-size:11px;border-collapse:collapse;width:100%;margin-top:9px}.monitoring-validation th,.monitoring-validation td{padding:7px 8px;border-bottom:1px solid #e1e9ef;text-align:left}
+.monitoring-warning-grid{display:grid;grid-template-columns:minmax(170px,1fr) minmax(0,2.5fr);gap:14px;margin:14px 0}
+.monitoring-warning-list{list-style:none;padding:0;margin:0;max-height:400px;overflow:auto}.monitoring-warning-list li+li{margin-top:8px}
+.monitoring-warning-list button{display:grid;gap:4px;width:100%;text-align:left;background:white;padding:9px 12px;border:1px solid var(--line);border-radius:6px;color:var(--ink);font-size:12px}
+.monitoring-warning-list button[aria-pressed=true]{border-color:var(--monitor-blue);background:#f2f8fd}.monitoring-warning-list time{color:var(--monitor-muted);font-size:10px}
+.monitoring-state{font-size:11px;font-weight:700;color:#28613f!important}.monitoring-state.forecast_risk{color:var(--monitor-risk)!important}.monitoring-state.observed_breach{color:var(--monitor-alert)!important}
+.monitoring-warning-detail h3{font-size:13px;margin:12px 0 5px}.monitoring-warning-detail p,.monitoring-warning-detail ol{font-size:12px;color:var(--monitor-muted);line-height:1.65;margin:4px 0}
+.monitoring-warning-detail ol{padding-left:18px}.monitoring-warning-detail dl{margin:0;font-size:12px}.monitoring-warning-detail dl>div{display:flex;gap:7px 16px;flex-wrap:wrap;padding:5px 0;border-bottom:1px solid #e1e9ef}
+.monitoring-warning-detail dt{min-width:150px;color:var(--monitor-muted)}.monitoring-warning-detail dd{margin:0;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.monitoring-sources{display:flex;gap:13px;padding:8px 0;font-size:11px}
+.monitoring-investigation{margin-top:12px}
+.monitoring-alerts{margin:14px 0}
+.monitoring-alerts ul{list-style:none;margin:8px 0 0;padding:0}
+.monitoring-alerts li{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:11px 0;border-top:1px solid var(--line)}
+.monitoring-alerts p{margin:4px 0 0;font-size:12px;color:var(--monitor-muted)}
+.monitoring-alert-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.monitoring-selected-label{font-size:11px;font-weight:650;color:var(--monitor-selection,#325f85)}
+.monitoring-selected-mark{stroke:var(--monitor-selection,#325f85);stroke-width:1.5;stroke-dasharray:5 3;vector-effect:non-scaling-stroke}
+.monitoring-legend .monitoring-selected-legend::before{border-top:2px dashed var(--monitor-selection,#325f85)}
+.monitoring-selected-summary{display:flex;align-items:center;flex-wrap:wrap;gap:6px 12px;padding:8px 10px;color:var(--monitor-muted);font-size:11px;overflow-wrap:anywhere}
+.monitoring-selected-summary time{font-variant-numeric:tabular-nums}
+.monitoring-refresh{margin-top:8px}
+
+.monitoring-embedded {
+  --monitor-blue: #96aafa;
+  --monitor-risk: #e9ba75;
+  --monitor-alert: #f0a49e;
+  --monitor-muted: #b8b4c3;
+  --monitor-grid: #393641;
+  --monitor-selection: #d8c8ff;
+  --monitor-surface: var(--ops-panel, #171719);
+  --monitor-line: var(--ops-line, #35353e);
+  min-width: 0;
+  padding: 0 14px 12px;
+  color: var(--ops-text, #e9e9ee);
+}
+.monitoring-embedded .monitoring-header { margin: 0 0 4px; gap: 8px; }
+.monitoring-embedded .monitoring-mode { background: #252330; color: #d2c9eb; border-color: #504961; }
+.monitoring-embedded .monitoring-live { background: #202c27; color: #acd4bc; border-color: #42584b; }
+.monitoring-embedded :is(.monitoring-panel, .monitoring-values > div, .monitoring-validation, .monitoring-warning-list button) {
+  background: var(--monitor-surface);
+  border-color: var(--monitor-line);
+  color: inherit;
+}
+.monitoring-embedded .monitoring-values { gap: 7px; margin: 8px 0; grid-template-columns: repeat(auto-fit, minmax(min(100%, 135px), 1fr)); }
+.ops-dark .monitoring-embedded .monitoring-values > div { padding: 7px 10px; min-width: 0; overflow-wrap: anywhere; }
+.ops-dark .monitoring-embedded .monitoring-values strong { font-size: 19px; }
+.monitoring-embedded .monitoring-panel { padding: 10px 11px; }
+.monitoring-embedded .monitoring-panel h3 { font-size: 13px; }
+.monitoring-embedded .monitoring-panel-head { flex-wrap: wrap; }
+.monitoring-embedded .monitoring-panel-head h3 { margin: 0; overflow-wrap: anywhere; }
+.monitoring-embedded .monitoring-chart { max-height: 190px; }
+.monitoring-embedded .monitoring-alerts { margin: 9px 0; }
+.monitoring-embedded .monitoring-alerts li { border-top-color: var(--monitor-line); overflow-wrap: anywhere; }
+.monitoring-embedded .monitoring-alerts li[data-selected='true'], .monitoring-embedded .monitoring-selected-summary {
+  background: #302a3c;
+  border: 1px solid #534562;
+  border-radius: 5px;
+}
+.monitoring-embedded .monitoring-alerts li[data-selected='true'] { padding-inline: 8px; }
+.monitoring-embedded .monitoring-selected-summary { margin-top: 8px; }
+.monitoring-embedded .monitoring-warning-list button[aria-pressed='true'] { border-color: var(--monitor-blue); background: #292737; }
+.monitoring-embedded .monitoring-warning-detail dl > div, .monitoring-embedded :is(.monitoring-validation th, .monitoring-validation td) { border-color: var(--monitor-line); }
+.monitoring-embedded .monitoring-state.below_threshold { color: #a5d1b5 !important; }
+.monitoring-embedded :is(.monitoring-sources a, .monitoring-warning-detail a, .monitoring-validation summary) { color: #d0c2ff; }
+.monitoring-embedded .monitoring-controls select { background: var(--monitor-surface); color: inherit; border-color: var(--monitor-line); }
+@media (min-width: 980px) {
+  .monitoring-embedded .monitoring-overview { display: grid; grid-template-columns: minmax(0, 1fr) minmax(165px, 24%); gap: 8px; margin-top: 8px; }
+  .monitoring-embedded .monitoring-values { grid-column: 2; grid-row: 1; grid-template-columns: minmax(0, 1fr); margin: 0; }
+  .monitoring-embedded .monitoring-overview > .monitoring-panel { grid-column: 1; grid-row: 1; min-width: 0; }
+}
+@media(max-width:700px){.monitoring-warning-grid,.monitoring-values{grid-template-columns:minmax(0,1fr)}.monitoring-values>div{padding:9px 12px}.monitoring-warning-list{max-height:220px}}

@@ -1,0 +1,11 @@
+groups:
+  - name: autotriager-checkout-lab
+    interval: 1s
+    rules:
+      - alert: AutoTriagerCheckoutLatencyHigh
+        expr: autotriager_checkout_latency_ms{service="checkout"} > 100
+        for: 0s
+        labels:
+          environment: autotriager-checkout-lab
+        annotations:
+          summary: Latest measured checkout request exceeds 100 ms

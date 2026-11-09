@@ -1,0 +1,109 @@
+{
+  "archive_md5": "b9e23f8842c404b396ffd2becff15de4",
+  "archive_url": "https://zenodo.org/records/14590730/files/RE2-OB.zip?download=1",
+  "baro_commit": "dc9f48786db50cf9469f2c596b79f01907d4ac91",
+  "baro_source_hashes": {
+    "RCAEval/e2e/baro.py": "3cf4e9c4f0b3d1a07ec23cd82169e869b17bcf01fb195c0ae5edca10baeda165",
+    "RCAEval/io/time_series.py": "37cc5223f99d241f091484851d0d9933ef6a42f4e124e0f2e0a85356eab2b1cd"
+  },
+  "cohort_sha256": "61c6dd7e6ff4e482c593b7891a8a402bd57a9788cba8940727e593b5e5f42640",
+  "completed_at": "2026-11-09T05:24:17.599788+00:00",
+  "demo_sha256": "6d692b61efa194a7e3b7ab1e8d9fb03ca949caf36667b1ec5f64151cbc13eac5",
+  "dependencies": {
+    "numpy": "2.5.4",
+    "pandas": "3.1.1",
+    "scikit-learn": "1.9.1"
+  },
+  "derived_manifest_sha256": "3ce1de8cad153c575fff85d7e87d33510f48957e253ff14996f0aa248532ab83",
+  "historic_prediction_freeze_sha256": {
+    "B1": "806f9790544f4d20fc73499e655a43978b30430a5b49a311f3f89ca5518ab564",
+    "Metric BARO": "7718d9d85866f07445f7653d9abb8a3df4960690d6b7dbdc7a10f0c85b0e47a9"
+  },
+  "labels_opened_after_freeze": true,
+  "limitations": [
+    "90 inspected development cases with shared underlying telemetry, but distinct input representations and compute budgets.",
+    "B1 predictions are reused from the frozen Gemini run; only local scoring is repeated.",
+    "This Online Boutique comparison is separate from Train Ticket Table 6 and does not measure causal mechanisms or live recovery."
+  ],
+  "method": "Pinned upstream mmbaro, using official Zenodo-derived logs and trace series",
+  "model_calls": 0,
+  "paired_hits": {
+    "Multi-source BARO vs B1": {
+      "Top 1": {
+        "both_hit": 14,
+        "both_miss": 4,
+        "left_only": 1,
+        "right_only": 71
+      },
+      "Top 3": {
+        "both_hit": 79,
+        "both_miss": 0,
+        "left_only": 0,
+        "right_only": 11
+      }
+    },
+    "Multi-source BARO vs Metric BARO": {
+      "Top 1": {
+        "both_hit": 12,
+        "both_miss": 74,
+        "left_only": 3,
+        "right_only": 1
+      },
+      "Top 3": {
+        "both_hit": 78,
+        "both_miss": 10,
+        "left_only": 1,
+        "right_only": 1
+      }
+    }
+  },
+  "prediction_freeze_sha256": "6c0b340f02b43f054e30974e9b1b49f8bbd5f1249c8813fb53fb2c87885f5874",
+  "preprocessing": "Same neutral metric frame as Metric BARO. Official precomputed CSVs clipped to the same time range. The unchanged upstream mmbaro performs its own metric subsampling and series normalization.",
+  "private_labels_sha256": "26335349f7120eafd76999d6843b0f7454085a8d943ab7e7c5dc0216823005de",
+  "scores": {
+    "B1": {
+      "AC@1": 0.9444444444444444,
+      "AC@3": 1.0,
+      "AC@5": 1.0,
+      "Avg@5": 0.9866666666666667,
+      "attempted": 90,
+      "planned": 90
+    },
+    "Metric BARO": {
+      "AC@1": 0.14444444444444443,
+      "AC@3": 0.8777777777777778,
+      "AC@5": 0.9444444444444444,
+      "Avg@5": 0.7422222222222222,
+      "attempted": 90,
+      "planned": 90
+    },
+    "Multi-source BARO": {
+      "AC@1": 0.16666666666666666,
+      "AC@3": 0.8777777777777778,
+      "AC@5": 0.9666666666666667,
+      "Avg@5": 0.7555555555555555,
+      "attempted": 90,
+      "planned": 90
+    }
+  },
+  "scores_sha256": "661c795a840c53844b3f07a25fe3115bf9b2a7c62b6030f50f43fad22c15038e",
+  "source": {
+    "commit": "dc9f48786db50cf9469f2c596b79f01907d4ac91",
+    "execution": "unchanged named AST definitions; broad package imports excluded",
+    "files": {
+      "RCAEval/benchmark/evaluation.py": "bf86db7e95f16678171612fb8fe1f0a718ee9a9e679964b4ae2161c18e111bcc",
+      "RCAEval/benchmark/scoring.py": "0cda48ebaffdd88dace6373dcd634fec7f2e550c8cc9f16a73ad8bb5a8fde031",
+      "RCAEval/classes/graph.py": "6e32cca5198fa0aff32b6a4dd7976d97e06ea347ec76fd79f9e576ad50ab6f87",
+      "RCAEval/e2e/__init__.py": "b35a97856afddc99dffcdeefe543fd8bc4b01d36169925be1561f9cd805f2952",
+      "RCAEval/io/time_series.py": "37cc5223f99d241f091484851d0d9933ef6a42f4e124e0f2e0a85356eab2b1cd"
+    },
+    "repository": "https://github.com/phamquiluan/RCAEval"
+  },
+  "started_at": "2026-11-09T05:24:07.438679+00:00",
+  "status_counts": {
+    "abstained": 0,
+    "completed": 90,
+    "failed": 0
+  },
+  "window": "The common RCAEval onset ±600 s half-open interval; known injection onset, not alert detection."
+}

@@ -1,0 +1,110 @@
+.investor-benchmark {
+  --benchmark-bar: #8aabad;
+  border: 1px solid var(--sc-line, #243b3f);
+  background: #0b1a1e;
+  color: var(--sc-ink, #eff5f0);
+  padding: clamp(18px, 3.25vw, 36px);
+}
+.investor-benchmark-heading,
+.investor-benchmark-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px 24px;
+}
+.investor-benchmark-kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--sc-cyan, #60f5ce);
+  font: 600 .66rem/1.25 Consolas, monospace;
+  letter-spacing: .14em;
+  margin: 0 0 10px;
+}
+.investor-benchmark-kicker span {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: currentColor;
+  box-shadow: 0 0 12px #60f5ce5c;
+}
+.investor-benchmark h2 {
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  letter-spacing: -.045em;
+  line-height: 1.12;
+}
+.investor-benchmark-description,
+.investor-benchmark-loading,
+.investor-benchmark-footer p {
+  margin: 8px 0 0;
+  color: var(--sc-muted, #93a7aa);
+  line-height: 1.6;
+  font-size: .86rem;
+}
+.investor-benchmark-cohort {
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  font: .69rem/1.2 Consolas, monospace;
+  color: var(--sc-muted, #93a7aa);
+}
+.investor-benchmark-cohort div { display: flex; flex-direction: column-reverse; gap: 5px; }
+.investor-benchmark-cohort dd { margin: 0; font-size: 1.55rem; color: var(--sc-ink, #eff5f0); }
+.investor-benchmark-table-scroll { overflow-x: auto; margin-top: 20px; }
+.investor-benchmark-table { width: 100%; min-width: 540px; border-collapse: collapse; text-align: left; font-size: .88rem; }
+.investor-benchmark-table thead { color: var(--sc-muted, #93a7aa); font: .7rem/1.25 Consolas, monospace; }
+.investor-benchmark-table th,
+.investor-benchmark-table td { padding: 11px 14px; border-bottom: 1px solid var(--sc-line, #243b3f); }
+.investor-benchmark-table thead th { font-weight: 500; }
+.investor-benchmark-method { display: flex; gap: 10px; align-items: center; }
+.investor-benchmark-table tbody th small { display: block; margin-top: 3px; font-weight: 400; color: var(--sc-muted, #93a7aa); }
+.investor-benchmark-table td:nth-child(2) { width: 38%; }
+.investor-benchmark-arm {
+  flex: none;
+  font: 600 .7rem/1 Consolas, monospace;
+  padding: 7px 6px;
+  border: 1px solid var(--sc-line, #243b3f);
+  color: var(--sc-muted, #93a7aa);
+}
+.investor-benchmark-value {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  font: .75rem/1 Consolas, monospace;
+  color: var(--sc-muted, #93a7aa);
+}
+.investor-benchmark-value strong { font-size: 1.02rem; color: var(--sc-ink, #eff5f0); }
+.investor-benchmark-meter {
+  position: relative;
+  height: 6px;
+  margin-top: 7px;
+  background: #26393b;
+  overflow: hidden;
+}
+.investor-benchmark-meter > span { display: block; height: 100%; background: var(--benchmark-bar); }
+.investor-benchmark-meter::after {
+  position: absolute;
+  inset: 0;
+  content: '';
+  background: linear-gradient(to right, transparent calc(100% - 1px), #0b1a1e calc(100% - 1px)) 0 0 / var(--benchmark-grid-size) 100%;
+}
+.investor-benchmark-table [data-method='B1'] { --benchmark-bar: var(--sc-cyan, #60f5ce); background: #60f5ce09; }
+.investor-benchmark-table [data-method='B1'] .investor-benchmark-value strong,
+.investor-benchmark-table [data-method='B1'] .investor-benchmark-arm { color: var(--sc-cyan, #60f5ce); }
+.investor-benchmark-table [data-method='B2'] { --benchmark-bar: #b7a27b; }
+.investor-benchmark-count { white-space: nowrap; font: 600 .87rem/1 Consolas, monospace; }
+.investor-benchmark-count small { color: var(--sc-muted, #93a7aa); font-size: .72rem; }
+.investor-benchmark-footer { align-items: baseline; margin-top: 16px; }
+.investor-benchmark-footer p { margin: 0; max-width: 68ch; font-size: .78rem; }
+.investor-benchmark-footer a { color: var(--sc-cyan, #60f5ce); font-size: .8rem; font-weight: 650; text-decoration: none; }
+.investor-benchmark-footer a:hover { text-decoration: underline; }
+.investor-benchmark-footer a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.investor-benchmark-footer a span { margin-left: 7px; }
+@media (max-width: 600px) {
+  .investor-benchmark-table { min-width: 485px; }
+  .investor-benchmark-table th,
+  .investor-benchmark-table td { padding: 10px 8px; }
+}

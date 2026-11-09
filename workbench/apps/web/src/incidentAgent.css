@@ -1,0 +1,170 @@
+.incident-desk-views a[data-agent-drop='true'] {
+  color: #eee8ff;
+  border-color: var(--ops-accent, #a995ff);
+  background: #393043;
+}
+.incident-desk-detail[data-agent-drop='true'] .incident-agent :is(.incident-agent-frame, .incident-agent-dropzone) {
+  outline: 2px solid var(--ops-accent, #a995ff);
+  outline-offset: 3px;
+}
+.incident-agent {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 23px;
+  width: 100%;
+  max-width: 950px;
+  min-width: 0;
+  height: 100%;
+  min-height: 0;
+  margin-inline: auto;
+  color: var(--ops-text, #e9e9ee);
+  font-size: 13px;
+  line-height: 1.65;
+}
+.incident-agent-heading h1 {
+  margin: 5px 0 6px;
+  color: var(--ops-text, #e9e9ee);
+  font-size: clamp(21px, 2vw, 27px);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -.025em;
+}
+.incident-agent-heading p { margin: 0; color: var(--ops-muted, #a3a3af); font-size: 13px; }
+.incident-agent-heading .incident-desk-kicker { color: #b6a7e4; font: 500 10px/1.5 Consolas, monospace; letter-spacing: .11em; }
+.incident-agent-dropzone {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 12px;
+  min-height: 250px;
+  padding: 40px 32px;
+  border: 1px dashed #4a4654;
+  border-radius: 12px;
+  text-align: center;
+  background: var(--ops-panel, #171719);
+}
+.incident-agent-dropzone svg { color: #b3a3dd; margin-bottom: 6px; }
+.incident-agent-dropzone h2 { margin: 0; color: var(--ops-text, #e9e9ee); font-size: 19px; font-weight: 550; }
+.incident-agent-dropzone p { margin: 0 0 10px; max-width: 350px; color: var(--ops-muted, #a3a3af); }
+.incident-agent-frame {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--ops-panel, #171719);
+  border: 1px solid #34323a;
+  border-radius: 12px;
+}
+.incident-agent-context {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 21px 26px 10px;
+  background: #1a1a1e;
+}
+.incident-agent-context h2 { margin: 5px 0 3px; color: var(--ops-text, #e9e9ee); font-size: 17px; font-weight: 600; line-height: 1.4; overflow-wrap: anywhere; }
+.incident-agent-context p { margin: 3px 0; color: var(--ops-muted, #a3a3af); font-size: 11px; overflow-wrap: anywhere; }
+.incident-agent-context code { color: #bcb6ca; font-size: 11px; }
+.incident-agent-context > a { flex-shrink: 0; color: #c4b8e5; font-size: 11px; font-weight: 500; padding: 4px 0; text-decoration: none; }
+.incident-agent-context > a:hover { color: #f0eaff; text-decoration: underline; text-underline-offset: 3px; }
+.incident-agent-context-label { display: flex; align-items: center; gap: 7px; color: #b6a7dc; font-size: 10px; font-weight: 500; }
+.incident-agent-context-label i { width: 5px; height: 5px; border-radius: 50%; background: var(--ops-accent, #a995ff); }
+.incident-agent-signals {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 26px 16px;
+  border-bottom: 1px solid #303036;
+  background: #1a1a1e;
+}
+.incident-agent-signals span { padding: 1px 7px; border: 1px solid #3c3a43; border-radius: 4px; color: #bab6c4; font-size: 10px; line-height: 1.7; }
+.incident-agent-signals span:last-child { margin-inline-start: 3px; padding-inline: 0; border-color: transparent; color: #a2a0ac; }
+.incident-agent-notice { margin: 12px 22px 0; flex: 0 0 auto; }
+.incident-agent-transcript {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 25px 26px 30px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #4d4a57 transparent;
+}
+.incident-agent-transcript > ol { display: grid; gap: 30px; padding: 0; margin: 0; list-style: none; }
+.incident-agent-empty { margin: 30px 0; color: var(--ops-muted, #a3a3af); font-size: 13px; text-align: center; }
+.incident-agent-turn { display: grid; gap: 18px; min-width: 0; }
+.incident-agent-question, .incident-agent-answer { padding: 15px 18px; min-width: 0; border: 0; border-radius: 8px; }
+.incident-agent-question { margin-left: clamp(0px, 4vw, 38px); background: #28272e; }
+.incident-agent-answer { padding: 2px 0 0; background: transparent; }
+.incident-agent-turn p { margin: 8px 0 0; color: #dad8e1; font-size: 13px; line-height: 1.8; white-space: pre-wrap; overflow-wrap: anywhere; }
+.incident-agent-message-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; color: #eeeaf6; font-size: 11px; }
+.incident-agent-message-meta strong { font-weight: 600; }
+.incident-agent-answer > .incident-agent-message-meta strong { display: inline-flex; align-items: center; gap: 8px; }
+.incident-agent-answer > .incident-agent-message-meta strong::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 2px; background: #b8a2fa; transform: rotate(45deg); }
+.incident-agent-message-meta time { color: #a6a1b2; font-size: 10px; text-align: right; font-variant-numeric: tabular-nums; }
+.incident-agent-citations { display: grid; gap: 5px; margin-top: 19px; }
+.incident-agent-citations h3 { margin: 0 0 3px; color: #b9b5c4; font-size: 11px; font-weight: 500; }
+.incident-agent-citations details { padding: 7px 11px; border: 1px solid #37333f; border-radius: 6px; background: #222126; }
+.incident-agent-citations summary, .incident-agent-disclosure summary { color: #c5b8e6; cursor: pointer; font-size: 12px; font-weight: 500; overflow-wrap: anywhere; }
+.incident-agent-citations summary:hover, .incident-agent-disclosure summary:hover { color: #ece3ff; }
+.incident-agent-citation-index { display: inline-grid; place-items: center; width: 17px; height: 17px; margin: 0 7px 0 4px; color: #d7caee; background: #3a324a; border-radius: 3px; font-size: 10px; }
+.incident-agent-citations p, .incident-agent-citations code { color: #b6b1c1; font-size: 11px; line-height: 1.8; overflow-wrap: anywhere; }
+.incident-agent-citations code { display: block; margin-top: 7px; color: #aaa2bb; }
+.incident-agent-disclosure { margin-top: 11px; }
+.incident-agent-disclosure ul { margin: 8px 0 0; padding-inline-start: 19px; color: #beb9ca; font-size: 12px; line-height: 1.75; }
+.incident-agent-disclosure li + li { margin-top: 5px; }
+.incident-agent-compose {
+  display: grid;
+  flex: 0 0 auto;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 7px 12px;
+  padding: 14px 22px 18px;
+  border-top: 1px solid #343139;
+  background: #1c1b20;
+}
+.incident-agent-compose label { grid-column: 1 / -1; color: #b5afc2; font-size: 10px; font-weight: 500; }
+.incident-agent-compose textarea {
+  width: 100%;
+  min-width: 0;
+  height: 65px;
+  min-height: 65px;
+  max-height: 135px;
+  padding: 11px 13px;
+  border: 1px solid #4a4456;
+  border-radius: 7px;
+  color: #efebf7;
+  background: #25232b;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.5;
+  resize: vertical;
+}
+.incident-agent-compose textarea::placeholder { color: #aca5ba; }
+.incident-agent-compose textarea:hover:enabled { border-color: #6d607f; }
+.incident-agent-compose textarea:disabled { color: #a39cad; background: #222126; }
+.incident-agent :is(a, summary, textarea):focus-visible { outline: 2px solid var(--ops-accent, #a995ff); outline-offset: 3px; }
+@media (max-width: 1100px) {
+  .incident-agent { gap: 18px; }
+  .incident-agent-context { padding: 18px 20px 9px; }
+  .incident-agent-signals { padding: 0 20px 13px; }
+  .incident-agent-transcript { padding: 20px; }
+  .incident-agent-compose { padding: 12px 18px 15px; }
+}
+@media (max-width: 640px) {
+  .incident-agent { height: auto; min-height: 0; }
+  .incident-agent-frame { min-height: 500px; }
+  .incident-agent-transcript { flex-basis: auto; min-height: 180px; max-height: 48dvh; }
+  .incident-agent-context { flex-wrap: wrap; gap: 7px; }
+  .incident-agent-heading h1 { font-size: 23px; }
+}
+@media (max-width: 560px) {
+  .incident-agent-context, .incident-agent-signals, .incident-agent-transcript, .incident-agent-compose { padding-inline: 15px; }
+  .incident-agent-question { margin-left: 12px; padding-inline: 13px; }
+  .incident-agent-compose { gap: 7px 9px; }
+  .incident-agent-context > a { font-size: 11px; }
+}

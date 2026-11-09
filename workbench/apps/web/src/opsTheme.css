@@ -1,0 +1,67 @@
+/* Shared visual tokens for the operational workspace. */
+:root.ops-dark {
+  color-scheme: dark;
+  --ops-bg: #202024; --ops-panel: #171719; --ops-text: #e9e9ee;
+  --ops-muted: #a3a3af; --ops-line: #35353e; --ops-accent: #a995ff;
+  --ink: #e9e9ee; --muted: #a3a3af; --line: #35353e; --blue: #bbaaff; --nav: #18181b;
+  color: var(--ops-text); background: var(--ops-bg);
+}
+.ops-dark body { color: var(--ops-text); background: var(--ops-bg); }
+.ops-dark * { scrollbar-color: #53515e transparent; scrollbar-width: thin; }
+.ops-dark .topbar { height: 48px; padding-inline: 19px; background: #1a1a1e; border-color: #39383f; }
+.ops-dark .brand { gap: 9px; }
+.ops-dark .brand strong { font-size: 15px; letter-spacing: -.3px; font-weight: 650; }
+.ops-dark .brand-mark { width: 20px; height: 20px; gap: 3px; }
+.ops-dark .brand-mark i { width: 3px; background: #a995ff; }
+.ops-dark .brand-mark i:nth-child(2) { height: 19px; background: #e2dbf5; }
+.ops-dark .brand-mark i:last-child { height: 13px; }
+.ops-dark .brand-divider { height: 15px; background: #414047; }
+.ops-dark .brand-description { font-size: 11px; color: #96939f; }
+.ops-dark .topbar-right { gap: 18px; }
+.ops-dark .local-indicator { color: #a29eac; font-size: 9px; letter-spacing: .8px; }
+.ops-dark .local-indicator i { background: #b6a2ef; width: 5px; height: 5px; }
+.ops-dark .language-toggle { border-color: #3d3b46; border-radius: 5px; color: #c3bfce; font-size: 11px; padding: 5px 8px; }
+.ops-dark .language-toggle:hover { background: #34313f; }
+.ops-dark .workspace { background: var(--ops-bg); min-height: calc(100dvh - 48px); }
+.ops-dark .workspace-incidents { min-height: 0; }
+.ops-dark .workspace-incidents main { padding: 0; max-width: none; }
+.ops-dark .sidebar { top: 48px; background: #18181b; border-right: 1px solid #303037; }
+.ops-dark .sidebar nav>a { color: #b5b1c0; }
+.ops-dark .sidebar nav>a>span { color: #a39bb5; }
+.ops-dark .sidebar nav>a.active { background: #302d3b; box-shadow: inset 2px 0 #a995ff; }
+.ops-dark .sidebar nav>a:hover { background: #29272f; }
+.ops-dark .sidebar :is(.nav-label,.sidebar-footer) { color: #95909f; }
+.ops-dark .sidebar-footer { border-color: #35313f; }
+.ops-dark pre { background: #141416; border-color: #393641; color: #cbc6d6; }
+.ops-dark .incident-desk .triage-records { color: #c5c1cf; }
+.ops-dark .incident-desk .triage-records li { border-color: #35353e; }
+.ops-dark .incident-desk .triage-records p { color: #b1acbf; }
+.ops-dark .incident-desk .triage-count { background: #34313d; color: #d6cfe6; }
+.ops-dark .incident-desk .triage-records h4 { color: #e3deed; }
+.ops-dark :is(.triage-lead,.triage-secondary) { background: #19191d; border: 1px solid #34343d; border-radius: 10px; padding: 22px; }
+.ops-dark .triage-kicker { color: #bca7ec; font-size: 11px; }
+.ops-dark .triage-lead h2 { font-size: 21px; font-weight: 600; }
+.ops-dark .triage-lead h3 { color: #d8d3e2; }
+.ops-dark :is(.triage-lead p,.triage-limits li,.triage-record-language) { color: #aaa5b7; }
+.ops-dark .triage-next { background: #25222d; border-color: #9580b8; border-radius: 0 5px 5px 0; }
+.ops-dark .triage-disclosure > summary { color: #c8b8f2; }
+.ops-dark .triage-lead > .triage-disclosure { border-color: #37323f; }
+.ops-dark .monitoring-console { --monitor-blue: #b4a0f2; --monitor-risk: #dfaf71; --monitor-alert: #ef9e8c; --monitor-muted: #aaa5b7; }
+.ops-dark .monitoring-header h1 { font-size: 28px; font-weight: 650; }
+.ops-dark .monitoring-mode { color: #c4b2f5; background: #302a3e; border-color: #4b405e; border-radius: 4px; }
+.ops-dark .monitoring-live { color: #b7d6c7; background: #252f2c; border-color: #3e5149; }
+.ops-dark .monitoring-controls select { color: #e9e9ee; background: #222126; border-color: #4b4655; }
+.ops-dark :is(.monitoring-values>div,.monitoring-panel,.monitoring-validation,.monitoring-warning-list button) { background: #18181c; border-color: #35323d; border-radius: 9px; }
+.ops-dark .monitoring-values>div { padding: 19px 20px; }
+.ops-dark .monitoring-values strong { font-size: 30px; font-weight: 550; }
+.ops-dark .monitoring-panel { padding: 20px; }
+.ops-dark .monitoring-validation summary { color: #c3b2ee; }
+.ops-dark :is(.monitoring-validation th,.monitoring-validation td,.monitoring-warning-detail dl>div) { border-color: #36323e; }
+.ops-dark .monitoring-warning-list button[aria-pressed=true] { border-color: #8771ba; background: #30283e; }
+.ops-dark .monitoring-state { color: #a5c6b5!important; }
+.ops-dark .monitoring-state.forecast_risk { color: #dfaf71!important; }
+.ops-dark .monitoring-state.observed_breach { color: #ef9e8c!important; }
+.ops-dark :focus-visible { outline-color: #bca7ff; }
+@media(max-width:640px) { .ops-dark .brand-description,.ops-dark .brand-divider { display: none; } }
+:root.ops-dark :is(.monitoring-validation,.lifecycle-samples) th { background: #222226; color: #c5c5cf; }
+:root.ops-dark tbody tr:hover { background: #29292f; }

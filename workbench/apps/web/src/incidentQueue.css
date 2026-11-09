@@ -1,0 +1,87 @@
+.incident-queue {
+  --queue-line: #323037;
+  --queue-muted: #a8a2b1;
+  --queue-active: #bcace1;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  color: #e2dfe9;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.incident-queue-header {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 7px;
+  min-height: 33px;
+  padding: 0 8px 8px;
+  border-bottom: 0;
+  color: #b7b1c2;
+  background: transparent;
+}
+.incident-queue-header h2, .incident-queue-group-label h3 {
+  flex: 1;
+  margin: 0;
+  color: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.incident-queue-signal { display: inline-flex; align-items: center; gap: 2px; height: 10px; color: #9e96ac; }
+.incident-queue-signal i { width: 2px; height: 4px; border-radius: 3px; background: currentColor; }
+.incident-queue-signal i:nth-child(2) { height: 9px; }
+.incident-queue-signal i:last-child { height: 6px; }
+.incident-queue-total, .incident-queue-group-label > span:last-child { color: var(--queue-muted); font-size: 10px; font-variant-numeric: tabular-nums; }
+.incident-queue-total { min-width: 18px; text-align: right; border: 0; }
+.incident-queue-groups {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #4e4759 transparent;
+}
+.incident-queue-group + .incident-queue-group { margin-top: 10px; border-top: 1px solid #2b282f; }
+.incident-queue-group-label { display: flex; align-items: center; gap: 7px; padding: 12px 8px 8px; color: var(--queue-muted); }
+.incident-queue-group-label h3 { font-size: 10px; letter-spacing: .015em; }
+.incident-queue-status { width: 5px; height: 5px; border-radius: 50%; background: #9aaf9c; }
+.incident-queue-group[data-status='unresolved'] .incident-queue-status { background: #e0a57f; }
+.incident-queue-group[data-status='recorded'] .incident-queue-status { background: #98939f; }
+.incident-queue-group ul { display: grid; gap: 3px; margin: 0 0 8px; padding: 0; list-style: none; }
+.incident-queue-group li { min-width: 0; }
+.incident-queue-attachable { display: grid; grid-template-columns: minmax(0, 1fr) 27px; align-items: stretch; gap: 1px; }
+.incident-queue-attachable a { cursor: grab; user-select: none; }
+.incident-queue-attachable a:active { cursor: grabbing; }
+.incident-queue-attach { display: grid; place-items: center; min-height: 35px; padding: 0; border: 1px solid transparent; border-radius: 5px; color: #92899f; background: transparent; }
+.incident-queue-attach:is(:hover, :focus-visible) { color: #e1d4fa; background: #302b37; border-color: #4b405d; }
+.incident-queue-group li a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 6px;
+  padding: 9px 7px 9px 8px;
+  color: #ddd9e4;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+.incident-queue-group li a:hover { background: #28252d; color: #f1ebf9; }
+.incident-queue-group li a[aria-current='page'] { border-color: #423b4d; background: #312b3a; box-shadow: inset 2px 0 #b49bdf; color: #f3ebff; }
+.incident-queue-group li a:focus-visible { outline: 2px solid var(--queue-active); outline-offset: -2px; }
+.incident-queue-name { grid-column: 1; min-width: 0; overflow-wrap: anywhere; font-size: 12px; font-weight: 500; line-height: 1.45; }
+.incident-queue time, .incident-queue-time { grid-column: 1; color: var(--queue-muted); font-size: 10px; font-variant-numeric: tabular-nums; line-height: 1.45; }
+.incident-queue-arrow { grid-area: 1 / 2 / 3 / 3; align-self: center; color: #81768f; font-size: 15px; line-height: 1; }
+.incident-queue a[aria-current='page'] .incident-queue-arrow { color: var(--queue-active); }
+.incident-queue-empty { margin: 0; padding: 14px 8px; color: var(--queue-muted); font-size: 12px; }
+@media (max-width: 640px) {
+  .incident-queue { flex: 0 1 auto; max-height: 160px; }
+  .incident-queue-header { min-height: 24px; padding-bottom: 4px; }
+  .incident-queue-groups { max-height: 136px; }
+  .incident-queue-group-label { padding-block: 6px; }
+}

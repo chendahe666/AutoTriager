@@ -1,0 +1,921 @@
+{
+  "artifact_kind": "synthetic_contract_examples_not_benchmark",
+  "description": "Author: Dahe Chen. Entirely invented contract test inputs, not observations, benchmark cases, human reviews or authorization.",
+  "objects": [
+    {
+      "schema": "Incident",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "incident_id": "syn_inc_01",
+        "system_id": "syn_system",
+        "display_name": "Synthetic contract example 01",
+        "mode": "fixture",
+        "data_revision": "synthetic-v1",
+        "manifest_digest": "fc6eed51e00e96f99489e9a40915dc03ded4555778a371ba804b8b55e121298a",
+        "time_window": {
+          "start": "2026-11-02T12:00:00Z",
+          "end": "2026-11-02T12:01:00Z"
+        },
+        "normalized_timestamp_unit": "iso8601_utc",
+        "service_ids": [
+          "svc_a",
+          "svc_b"
+        ],
+        "modalities": {
+          "metrics": {
+            "availability": "present",
+            "record_count": 1,
+            "original_timestamp_unit": "unix_ms",
+            "value_units": [
+              "ms"
+            ],
+            "reason": null
+          },
+          "logs": {
+            "availability": "absent",
+            "record_count": 0,
+            "original_timestamp_unit": "unknown",
+            "value_units": [],
+            "reason": "Not present in this invented example"
+          },
+          "traces": {
+            "availability": "unknown",
+            "record_count": null,
+            "original_timestamp_unit": "unknown",
+            "value_units": [],
+            "reason": "Coverage not checked in this example"
+          }
+        },
+        "coverage_warnings": [
+          "All values are synthetic, not observed measurements."
+        ]
+      }
+    },
+    {
+      "schema": "RunConfig",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "run_id": "syn_run_01",
+        "incident_id": "syn_inc_01",
+        "mode": "fixture",
+        "incident_manifest_digest": "fc6eed51e00e96f99489e9a40915dc03ded4555778a371ba804b8b55e121298a",
+        "data_revision": "synthetic-v1",
+        "engine_source_commit": "869054f0058604109325bdc9e9d0d3d27ff883bd",
+        "engine_build_id": null,
+        "adapter_version": "planned-0.1",
+        "model_key": null,
+        "resolved_model_id": null,
+        "policy_id": "synthetic_readonly",
+        "policy_version": "1",
+        "policy_digest": "785c7c9e8eb92b41a6b69771102ecc8b635532dc69a8af65a6f3e68fb29245a2",
+        "config_digest": "c138ef7dd66079198ec5712828f0351b47987135f6881be096e4ff7ba480a0f2",
+        "inference_authorized": false,
+        "grant_id": null,
+        "grant_expires_at": null,
+        "budget": {
+          "max_model_calls": 0,
+          "max_tool_calls": 5,
+          "max_source_bytes": 16384,
+          "max_output_tokens": 0,
+          "max_wall_time_seconds": 120,
+          "paid_fallback_allowed": false,
+          "max_total_rows": 100,
+          "max_total_input_tokens": 0,
+          "max_total_output_tokens": 0
+        }
+      }
+    },
+    {
+      "schema": "Investigation",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "investigation_id": "syn_inv_01",
+        "incident_id": "syn_inc_01",
+        "title": "Synthetic demonstration only",
+        "created_at": "2026-11-02T12:00:00Z",
+        "updated_at": "2026-11-02T12:00:00Z",
+        "latest_run_id": "syn_run_01"
+      }
+    },
+    {
+      "schema": "Run",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "run_id": "syn_run_01",
+        "investigation_id": "syn_inv_01",
+        "incident_id": "syn_inc_01",
+        "parent_run_id": null,
+        "question": "Which components deserve examination in this synthetic example?",
+        "mode": "fixture",
+        "state": "COMPLETED",
+        "revision": 4,
+        "run_generation": 1,
+        "config_digest": "c138ef7dd66079198ec5712828f0351b47987135f6881be096e4ff7ba480a0f2",
+        "created_at": "2026-11-02T12:00:00Z",
+        "updated_at": "2026-11-02T12:00:00Z",
+        "last_sequence": 12,
+        "termination_code": null,
+        "remote_stop_status": "not_dispatched",
+        "config": {
+          "schema_version": "autotriager.api.v1",
+          "run_id": "syn_run_01",
+          "incident_id": "syn_inc_01",
+          "mode": "fixture",
+          "incident_manifest_digest": "fc6eed51e00e96f99489e9a40915dc03ded4555778a371ba804b8b55e121298a",
+          "data_revision": "synthetic-v1",
+          "engine_source_commit": "869054f0058604109325bdc9e9d0d3d27ff883bd",
+          "engine_build_id": null,
+          "adapter_version": "planned-0.1",
+          "model_key": null,
+          "resolved_model_id": null,
+          "policy_id": "synthetic_readonly",
+          "policy_version": "1",
+          "policy_digest": "785c7c9e8eb92b41a6b69771102ecc8b635532dc69a8af65a6f3e68fb29245a2",
+          "config_digest": "c138ef7dd66079198ec5712828f0351b47987135f6881be096e4ff7ba480a0f2",
+          "inference_authorized": false,
+          "grant_id": null,
+          "grant_expires_at": null,
+          "budget": {
+            "max_model_calls": 0,
+            "max_tool_calls": 5,
+            "max_source_bytes": 16384,
+            "max_output_tokens": 0,
+            "max_wall_time_seconds": 120,
+            "paid_fallback_allowed": false,
+            "max_total_rows": 100,
+            "max_total_input_tokens": 0,
+            "max_total_output_tokens": 0
+          }
+        },
+        "answer": {
+          "schema_version": "autotriager.api.v1",
+          "run_id": "syn_run_01",
+          "incident_id": "syn_inc_01",
+          "status": "ranked_candidates",
+          "candidates": [
+            {
+              "rank": 1,
+              "service_id": "svc_b",
+              "hypothesis": "Synthetic candidate only; this value does not establish a causal fault.",
+              "supporting_evidence_ids": [
+                "syn_ev_02"
+              ],
+              "contradicting_evidence_ids": [],
+              "missing_checks": [
+                "Compare against an independently collected healthy reference."
+              ]
+            }
+          ],
+          "observations": [
+            {
+              "text": "Invented record reports 42 ms for svc_b.",
+              "evidence_ids": [
+                "syn_ev_01"
+              ]
+            }
+          ],
+          "unknowns": [
+            "No real fault, ground truth, logs or verified dependency is represented."
+          ],
+          "next_checks": [
+            "Collect a healthy comparison before interpreting this metric."
+          ],
+          "answer_id": "syn_ans_01",
+          "raw_output_digest": "cdd39ae5ebc5d8c6d018d36c89213a2723cccf70236c1e57a2b90e42f0f2450b",
+          "structure_valid": true,
+          "reference_valid": true,
+          "semantic_support_status": "not_assessed",
+          "created_at": "2026-11-02T12:00:00Z"
+        }
+      }
+    },
+    {
+      "schema": "ToolQuery",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "query_id": "syn_q_01",
+        "run_id": "syn_run_01",
+        "incident_id": "syn_inc_01",
+        "tool_name": "incident_metrics",
+        "modality": "metrics",
+        "time_window": {
+          "start": "2026-11-02T12:00:00Z",
+          "end": "2026-11-02T12:01:00Z"
+        },
+        "service_ids": [
+          "svc_b"
+        ],
+        "limit": 10,
+        "max_bytes": 4096,
+        "parameters": {
+          "metric_names": [
+            "latency"
+          ],
+          "aggregation": "none"
+        }
+      }
+    },
+    {
+      "schema": "QueryDetail",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "query": {
+          "schema_version": "autotriager.api.v1",
+          "query_id": "syn_q_01",
+          "run_id": "syn_run_01",
+          "incident_id": "syn_inc_01",
+          "tool_name": "incident_metrics",
+          "modality": "metrics",
+          "time_window": {
+            "start": "2026-11-02T12:00:00Z",
+            "end": "2026-11-02T12:01:00Z"
+          },
+          "service_ids": [
+            "svc_b"
+          ],
+          "limit": 10,
+          "max_bytes": 4096,
+          "parameters": {
+            "metric_names": [
+              "latency"
+            ],
+            "aggregation": "none"
+          }
+        },
+        "result": {
+          "schema_version": "autotriager.api.v1",
+          "query_id": "syn_q_01",
+          "run_id": "syn_run_01",
+          "incident_id": "syn_inc_01",
+          "status": "success",
+          "availability": "present",
+          "evidence_ids": [
+            "syn_ev_01",
+            "syn_ev_02"
+          ],
+          "returned_count": 1,
+          "matched_count": 1,
+          "truncated": false,
+          "result_complete": true,
+          "limitations": [],
+          "error": null
+        }
+      }
+    },
+    {
+      "schema": "ToolReply",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "query": {
+          "schema_version": "autotriager.api.v1",
+          "query_id": "syn_q_01",
+          "run_id": "syn_run_01",
+          "incident_id": "syn_inc_01",
+          "tool_name": "incident_metrics",
+          "modality": "metrics",
+          "time_window": {
+            "start": "2026-11-02T12:00:00Z",
+            "end": "2026-11-02T12:01:00Z"
+          },
+          "service_ids": [
+            "svc_b"
+          ],
+          "limit": 10,
+          "max_bytes": 4096,
+          "parameters": {
+            "metric_names": [
+              "latency"
+            ],
+            "aggregation": "none"
+          }
+        },
+        "result": {
+          "schema_version": "autotriager.api.v1",
+          "query_id": "syn_q_01",
+          "run_id": "syn_run_01",
+          "incident_id": "syn_inc_01",
+          "status": "success",
+          "availability": "present",
+          "evidence_ids": [
+            "syn_ev_01",
+            "syn_ev_02"
+          ],
+          "returned_count": 1,
+          "matched_count": 1,
+          "truncated": false,
+          "result_complete": true,
+          "limitations": [],
+          "error": null
+        },
+        "evidence": [
+          {
+            "schema_version": "autotriager.api.v1",
+            "evidence_id": "syn_ev_01",
+            "run_id": "syn_run_01",
+            "incident_id": "syn_inc_01",
+            "query_id": "syn_q_01",
+            "service_id": "svc_b",
+            "modality": "metrics",
+            "kind": "raw",
+            "source_artifact_digest": "9235f88a9895eb02f46eb4536672f2251a40463cbf79349ceeea90bf973ef18b",
+            "record_locator": "artifact_01:record_1",
+            "content_digest": "0dd72f1193bbc6dcc04442bc1f166a2bf20049ceacad9a57e99351c06ed6660a",
+            "observed_window": {
+              "start": "2026-11-02T12:00:00Z",
+              "end": "2026-11-02T12:01:00Z"
+            },
+            "preserved_at": "2026-11-02T12:00:00Z",
+            "unit": "ms",
+            "record": {
+              "service_id": "svc_b",
+              "timestamp": "2026-11-02T12:00:00Z",
+              "metric": "latency",
+              "value": 42,
+              "unit": "ms"
+            },
+            "derivation": null,
+            "limitations": [
+              "Invented value; not a fault signal or result."
+            ]
+          },
+          {
+            "schema_version": "autotriager.api.v1",
+            "evidence_id": "syn_ev_02",
+            "run_id": "syn_run_01",
+            "incident_id": "syn_inc_01",
+            "query_id": "syn_q_01",
+            "service_id": "svc_b",
+            "modality": "metrics",
+            "kind": "derived",
+            "source_artifact_digest": "9235f88a9895eb02f46eb4536672f2251a40463cbf79349ceeea90bf973ef18b",
+            "record_locator": "derived_01:record_1",
+            "content_digest": "629749a9e703b2821781a0720ee577ebf155770d5fb641a3cb55564e96f829b0",
+            "observed_window": {
+              "start": "2026-11-02T12:00:00Z",
+              "end": "2026-11-02T12:01:00Z"
+            },
+            "preserved_at": "2026-11-02T12:00:00Z",
+            "unit": "ms",
+            "record": {
+              "statistic": "mean",
+              "value": 42,
+              "sample_count": 1,
+              "unit": "ms"
+            },
+            "derivation": {
+              "parent_evidence_ids": [
+                "syn_ev_01"
+              ],
+              "method_id": "arithmetic_mean",
+              "method_version": "example-v1",
+              "missing_value_policy": "exclude_null_report_count",
+              "unit": "ms"
+            },
+            "limitations": [
+              "Invented value; not a fault signal or result."
+            ]
+          }
+        ],
+        "manifest": null,
+        "service_ids": []
+      }
+    },
+    {
+      "schema": "QueryResult",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "query_id": "syn_q_01",
+        "run_id": "syn_run_01",
+        "incident_id": "syn_inc_01",
+        "status": "success",
+        "availability": "present",
+        "evidence_ids": [
+          "syn_ev_01",
+          "syn_ev_02"
+        ],
+        "returned_count": 1,
+        "matched_count": 1,
+        "truncated": false,
+        "result_complete": true,
+        "limitations": [],
+        "error": null
+      }
+    },
+    {
+      "schema": "Evidence",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "evidence_id": "syn_ev_01",
+        "run_id": "syn_run_01",
+        "incident_id": "syn_inc_01",
+        "query_id": "syn_q_01",
+        "service_id": "svc_b",
+        "modality": "metrics",
+        "kind": "raw",
+        "source_artifact_digest": "9235f88a9895eb02f46eb4536672f2251a40463cbf79349ceeea90bf973ef18b",
+        "record_locator": "artifact_01:record_1",
+        "content_digest": "0dd72f1193bbc6dcc04442bc1f166a2bf20049ceacad9a57e99351c06ed6660a",
+        "observed_window": {
+          "start": "2026-11-02T12:00:00Z",
+          "end": "2026-11-02T12:01:00Z"
+        },
+        "preserved_at": "2026-11-02T12:00:00Z",
+        "unit": "ms",
+        "record": {
+          "service_id": "svc_b",
+          "timestamp": "2026-11-02T12:00:00Z",
+          "metric": "latency",
+          "value": 42,
+          "unit": "ms"
+        },
+        "derivation": null,
+        "limitations": [
+          "Invented value; not a fault signal or result."
+        ]
+      }
+    },
+    {
+      "schema": "Evidence",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "evidence_id": "syn_ev_02",
+        "run_id": "syn_run_01",
+        "incident_id": "syn_inc_01",
+        "query_id": "syn_q_01",
+        "service_id": "svc_b",
+        "modality": "metrics",
+        "kind": "derived",
+        "source_artifact_digest": "9235f88a9895eb02f46eb4536672f2251a40463cbf79349ceeea90bf973ef18b",
+        "record_locator": "derived_01:record_1",
+        "content_digest": "629749a9e703b2821781a0720ee577ebf155770d5fb641a3cb55564e96f829b0",
+        "observed_window": {
+          "start": "2026-11-02T12:00:00Z",
+          "end": "2026-11-02T12:01:00Z"
+        },
+        "preserved_at": "2026-11-02T12:00:00Z",
+        "unit": "ms",
+        "record": {
+          "statistic": "mean",
+          "value": 42,
+          "sample_count": 1,
+          "unit": "ms"
+        },
+        "derivation": {
+          "parent_evidence_ids": [
+            "syn_ev_01"
+          ],
+          "method_id": "arithmetic_mean",
+          "method_version": "example-v1",
+          "missing_value_policy": "exclude_null_report_count",
+          "unit": "ms"
+        },
+        "limitations": [
+          "Invented value; not a fault signal or result."
+        ]
+      }
+    },
+    {
+      "schema": "ModelAnswer",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "run_id": "syn_run_01",
+        "incident_id": "syn_inc_01",
+        "status": "ranked_candidates",
+        "candidates": [
+          {
+            "rank": 1,
+            "service_id": "svc_b",
+            "hypothesis": "Synthetic candidate only; this value does not establish a causal fault.",
+            "supporting_evidence_ids": [
+              "syn_ev_02"
+            ],
+            "contradicting_evidence_ids": [],
+            "missing_checks": [
+              "Compare against an independently collected healthy reference."
+            ]
+          }
+        ],
+        "observations": [
+          {
+            "text": "Invented record reports 42 ms for svc_b.",
+            "evidence_ids": [
+              "syn_ev_01"
+            ]
+          }
+        ],
+        "unknowns": [
+          "No real fault, ground truth, logs or verified dependency is represented."
+        ],
+        "next_checks": [
+          "Collect a healthy comparison before interpreting this metric."
+        ]
+      }
+    },
+    {
+      "schema": "Answer",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "run_id": "syn_run_01",
+        "incident_id": "syn_inc_01",
+        "status": "ranked_candidates",
+        "candidates": [
+          {
+            "rank": 1,
+            "service_id": "svc_b",
+            "hypothesis": "Synthetic candidate only; this value does not establish a causal fault.",
+            "supporting_evidence_ids": [
+              "syn_ev_02"
+            ],
+            "contradicting_evidence_ids": [],
+            "missing_checks": [
+              "Compare against an independently collected healthy reference."
+            ]
+          }
+        ],
+        "observations": [
+          {
+            "text": "Invented record reports 42 ms for svc_b.",
+            "evidence_ids": [
+              "syn_ev_01"
+            ]
+          }
+        ],
+        "unknowns": [
+          "No real fault, ground truth, logs or verified dependency is represented."
+        ],
+        "next_checks": [
+          "Collect a healthy comparison before interpreting this metric."
+        ],
+        "answer_id": "syn_ans_01",
+        "raw_output_digest": "cdd39ae5ebc5d8c6d018d36c89213a2723cccf70236c1e57a2b90e42f0f2450b",
+        "structure_valid": true,
+        "reference_valid": true,
+        "semantic_support_status": "not_assessed",
+        "created_at": "2026-11-02T12:00:00Z"
+      }
+    },
+    {
+      "schema": "CreateInvestigation",
+      "value": {
+        "incident_id": "syn_inc_01",
+        "title": "Synthetic demonstration only"
+      }
+    },
+    {
+      "schema": "CreateRun",
+      "value": {
+        "question": "Which components deserve examination in this synthetic example?",
+        "policy_id": "synthetic_readonly"
+      }
+    },
+    {
+      "schema": "Review",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "review_id": "syn_review_01",
+        "run_id": "syn_run_01",
+        "answer_id": "syn_ans_01",
+        "reviewer_kind": "local_user",
+        "verdict": "cannot_judge",
+        "notes": "Synthetic fixture; no human validation claimed.",
+        "created_at": "2026-11-02T12:00:00Z"
+      }
+    },
+    {
+      "schema": "Idempotency",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "scope": "synthetic_actor",
+        "route": "/api/v1/investigations",
+        "key": "syn_create_01",
+        "request_digest": "5fd43bb8707f5447eb365c44bdca5192856048a2929f3ebd83fea9e580198f70",
+        "resource_type": "investigation",
+        "resource_id": "syn_inv_01",
+        "response_status": 201,
+        "created_at": "2026-11-02T12:00:00Z"
+      }
+    },
+    {
+      "schema": "ProviderDispatchReservation",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "dispatch_id": "syn_dispatch_01",
+        "run_id": "syn_run_01",
+        "kind": "engine_request",
+        "parent_dispatch_id": null,
+        "grant_id": null,
+        "slot_name": "engine_investigation",
+        "state": "COMPLETION_OBSERVED",
+        "calls_reserved": 0,
+        "reserved_input_tokens": 0,
+        "reserved_output_tokens": 0,
+        "created_at": "2026-11-02T12:00:00Z",
+        "dispatched_at": null,
+        "completed_at": "2026-11-02T12:00:00Z",
+        "provider_request_id": null,
+        "budget_digest": "d017d8ca11e7fbe8e0877c4ac4d246d719344231a9c5975c62b6bdb756168ff2"
+      }
+    },
+    {
+      "schema": "Health",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "status": "ok",
+        "application_status": "ready",
+        "store_status": "ready",
+        "engine_status": "not_checked"
+      }
+    },
+    {
+      "schema": "Capabilities",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "modes": [
+          "fixture",
+          "offline_replay"
+        ],
+        "live_mode_supported": false,
+        "engine_source_commit": "869054f0058604109325bdc9e9d0d3d27ff883bd",
+        "engine_runtime_verified": false,
+        "model_configured": false,
+        "model_key": null,
+        "resolved_model_id": null,
+        "free_tier_status": "unverified",
+        "inference_authorized": false,
+        "budget": {
+          "max_model_calls": 0,
+          "max_tool_calls": 5,
+          "max_source_bytes": 16384,
+          "max_output_tokens": 0,
+          "max_wall_time_seconds": 120,
+          "paid_fallback_allowed": false,
+          "max_total_rows": 100,
+          "max_total_input_tokens": 0,
+          "max_total_output_tokens": 0
+        },
+        "allowed_policy_ids": [
+          "synthetic_readonly"
+        ],
+        "pending_gates": [
+          "Engine/provider compatibility not implemented."
+        ],
+        "csrf_token": "SYNTHETIC_NOT_A_CREDENTIAL"
+      }
+    },
+    {
+      "schema": "CancelReceipt",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "run_id": "syn_run_01",
+        "state": "COMPLETED",
+        "logical_fence_active": true,
+        "provider_dispatch_pending": false,
+        "remote_stop_status": "not_dispatched",
+        "billing_may_continue": false,
+        "last_sequence": 12
+      }
+    },
+    {
+      "schema": "Error",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "error": {
+          "code": "CONFIGURATION_NOT_READY",
+          "message": "No compatible runtime configured.",
+          "details": [
+            {
+              "field": "model_key",
+              "reason": "Server registry entry not configured"
+            }
+          ],
+          "retryable": false,
+          "correlation_id": "syn_corr_01",
+          "run_id": null
+        }
+      }
+    },
+    {
+      "schema": "Event",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "event_id": "syn_evt_01",
+        "run_id": "syn_run_01",
+        "sequence": 1,
+        "received_at": "2026-11-02T12:00:00Z",
+        "upstream_observed_at": null,
+        "event_type": "run.state_changed",
+        "upstream_call_id": null,
+        "payload": {
+          "from_state": "CREATED",
+          "to_state": "QUEUED",
+          "reason": null
+        }
+      }
+    },
+    {
+      "schema": "Event",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "event_id": "syn_evt_02",
+        "run_id": "syn_run_01",
+        "sequence": 2,
+        "received_at": "2026-11-02T12:00:00Z",
+        "upstream_observed_at": null,
+        "event_type": "run.state_changed",
+        "upstream_call_id": null,
+        "payload": {
+          "from_state": "QUEUED",
+          "to_state": "RUNNING",
+          "reason": "Synthetic fixture path"
+        }
+      }
+    },
+    {
+      "schema": "Event",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "event_id": "syn_evt_03",
+        "run_id": "syn_run_01",
+        "sequence": 3,
+        "received_at": "2026-11-02T12:00:00Z",
+        "upstream_observed_at": null,
+        "event_type": "tool.started",
+        "upstream_call_id": "syn_call_01",
+        "payload": {
+          "query_id": "syn_q_01",
+          "tool_name": "incident_metrics"
+        }
+      }
+    },
+    {
+      "schema": "Event",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "event_id": "syn_evt_04",
+        "run_id": "syn_run_01",
+        "sequence": 4,
+        "received_at": "2026-11-02T12:00:00Z",
+        "upstream_observed_at": null,
+        "event_type": "evidence.added",
+        "upstream_call_id": null,
+        "payload": {
+          "evidence_ids": [
+            "syn_ev_01",
+            "syn_ev_02"
+          ]
+        }
+      }
+    },
+    {
+      "schema": "Event",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "event_id": "syn_evt_05",
+        "run_id": "syn_run_01",
+        "sequence": 5,
+        "received_at": "2026-11-02T12:00:00Z",
+        "upstream_observed_at": null,
+        "event_type": "tool.finished",
+        "upstream_call_id": "syn_call_01",
+        "payload": {
+          "query_id": "syn_q_01",
+          "status": "success",
+          "evidence_ids": [
+            "syn_ev_01",
+            "syn_ev_02"
+          ],
+          "returned_count": 1,
+          "truncated": false,
+          "error": null
+        }
+      }
+    },
+    {
+      "schema": "Event",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "event_id": "syn_evt_06",
+        "run_id": "syn_run_01",
+        "sequence": 6,
+        "received_at": "2026-11-02T12:00:00Z",
+        "upstream_observed_at": null,
+        "event_type": "run.state_changed",
+        "upstream_call_id": null,
+        "payload": {
+          "from_state": "RUNNING",
+          "to_state": "VALIDATING",
+          "reason": null
+        }
+      }
+    },
+    {
+      "schema": "Event",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "event_id": "syn_evt_07",
+        "run_id": "syn_run_01",
+        "sequence": 7,
+        "received_at": "2026-11-02T12:00:00Z",
+        "upstream_observed_at": null,
+        "event_type": "answer.received",
+        "upstream_call_id": null,
+        "payload": {
+          "answer_id": "syn_ans_01",
+          "output_digest": "cdd39ae5ebc5d8c6d018d36c89213a2723cccf70236c1e57a2b90e42f0f2450b"
+        }
+      }
+    },
+    {
+      "schema": "Event",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "event_id": "syn_evt_08",
+        "run_id": "syn_run_01",
+        "sequence": 8,
+        "received_at": "2026-11-02T12:00:00Z",
+        "upstream_observed_at": null,
+        "event_type": "validation.finished",
+        "upstream_call_id": null,
+        "payload": {
+          "structure_valid": true,
+          "reference_valid": true,
+          "issues": []
+        }
+      }
+    },
+    {
+      "schema": "Event",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "event_id": "syn_evt_09",
+        "run_id": "syn_run_01",
+        "sequence": 9,
+        "received_at": "2026-11-02T12:00:00Z",
+        "upstream_observed_at": null,
+        "event_type": "usage.observed",
+        "upstream_call_id": null,
+        "payload": {
+          "model_calls": 0,
+          "tool_calls": 1,
+          "input_tokens": null,
+          "output_tokens": null,
+          "provider_cost_usd": null,
+          "accounting_status": "partial"
+        }
+      }
+    },
+    {
+      "schema": "Event",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "event_id": "syn_evt_10",
+        "run_id": "syn_run_01",
+        "sequence": 10,
+        "received_at": "2026-11-02T12:00:00Z",
+        "upstream_observed_at": null,
+        "event_type": "run.state_changed",
+        "upstream_call_id": null,
+        "payload": {
+          "from_state": "VALIDATING",
+          "to_state": "COMPLETED",
+          "reason": "Schema/reference checks only"
+        }
+      }
+    },
+    {
+      "schema": "Event",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "event_id": "syn_evt_11",
+        "run_id": "syn_run_01",
+        "sequence": 11,
+        "received_at": "2026-11-02T12:00:00Z",
+        "upstream_observed_at": null,
+        "event_type": "warning",
+        "upstream_call_id": null,
+        "payload": {
+          "code": "SYNTHETIC_EXAMPLE",
+          "message": "Not a live result or causal validation."
+        }
+      }
+    },
+    {
+      "schema": "Event",
+      "value": {
+        "schema_version": "autotriager.api.v1",
+        "event_id": "syn_evt_12",
+        "run_id": "syn_run_01",
+        "sequence": 12,
+        "received_at": "2026-11-02T12:00:00Z",
+        "upstream_observed_at": null,
+        "event_type": "late_observation",
+        "upstream_call_id": null,
+        "payload": {
+          "raw_event_digest": "6505ca2b014d07ba2d969cb28b66bdf18b0c27d4e3cccac5a1c122fac87f0644",
+          "original_event_type": "tool_result",
+          "reason": "After terminal fence"
+        }
+      }
+    }
+  ]
+}

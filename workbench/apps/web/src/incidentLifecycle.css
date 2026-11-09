@@ -1,0 +1,41 @@
+.incident-lifecycle > h3 { margin: 0 0 12px; font-size: 17px; }
+
+.lifecycle-steps {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding-inline-start: 24px;
+}
+
+.lifecycle-steps > li {
+  padding: 0 0 12px 4px;
+  border-bottom: 1px solid #e0e9ee;
+  overflow-wrap: anywhere;
+}
+
+.lifecycle-steps > li:last-child { padding-bottom: 0; border-bottom: 0; }
+.lifecycle-steps > li::marker { color: #1670ac; font-weight: 700; }
+.lifecycle-steps h4 { margin: 0; font-size: 14px; }
+.lifecycle-steps .lifecycle-outcome { color: var(--ink); font-size: 13px; }
+.lifecycle-lines { padding-inline-start: 18px; margin: 6px 0 0; color: #415c70; font-size: 12px; }
+.lifecycle-evidence-links { display: flex; flex-wrap: wrap; gap: 0 10px; }
+.lifecycle-approval { display: grid; justify-items: start; gap: 8px; margin-top: 12px; }
+.lifecycle-approval code { color: #50687a; font-size: 11px; }
+.lifecycle-samples { width: 100%; margin-top: 8px; border-collapse: collapse; font-size: 12px; }
+.lifecycle-samples caption { padding-bottom: 4px; text-align: start; color: #415c70; font-weight: 600; }
+.lifecycle-samples td, .lifecycle-samples th { padding: 4px; border-bottom: 1px solid #e0e9ee; text-align: start; }
+.lifecycle-samples tr:focus, .incident-desk-evidence li:focus { outline: 2px solid #0765b5; outline-offset: 2px; }
+.lifecycle-recommendation { margin-top: 7px; }
+
+.ops-dark .incident-lifecycle > h3 { color: #e9e9ee; font-size: 15px; font-weight: 600; }
+.ops-dark .lifecycle-steps > li { border-color: #35353e; padding-bottom: 16px; }
+.ops-dark .lifecycle-steps > li::marker { color: #b5a4f4; }
+.ops-dark .lifecycle-steps h4 { color: #e9e9ee; font-weight: 600; }
+.ops-dark .lifecycle-steps .lifecycle-outcome { color: #d4d4de; }
+.ops-dark .lifecycle-lines, .ops-dark .lifecycle-approval code, .ops-dark .lifecycle-samples caption { color: #aaaab7; }
+.ops-dark .lifecycle-lines { line-height: 1.8; }
+.ops-dark .lifecycle-evidence-links button, .ops-dark .lifecycle-recommendation a { color: #c5b7fa; }
+.ops-dark .lifecycle-samples { color: #d4d4de; }
+.ops-dark .lifecycle-samples td, .ops-dark .lifecycle-samples th { border-color: #35353e; padding: 8px; }
+.ops-dark .lifecycle-samples th { color: #aaaab7; }
+.ops-dark .lifecycle-samples tr:focus, .ops-dark .incident-desk-evidence li:focus { outline-color: #b5a4f4; }

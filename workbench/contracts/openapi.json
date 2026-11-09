@@ -1,0 +1,4437 @@
+{
+  "openapi": "3.1.0",
+  "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
+  "info": {
+    "title": "AutoTriager Workbench - Proposed Runtime API",
+    "version": "0.1.0",
+    "description": "Author: Dahe Chen. Design specification only. No endpoint is claimed implemented. Initial deployment: one local user, same-origin SPA/API, loopback only, fixture or offline replay. GET / (outside this API) bootstraps an application-controlled HttpOnly SameSite=Strict at_session cookie. GET capabilities returns a session-bound anti-CSRF value. POST requires exact allowed Origin and X-CSRF-Token. Provider, engine and gateway credentials never reach the browser.",
+    "contact": {
+      "name": "Dahe Chen"
+    }
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "security": [
+    {
+      "localSession": []
+    }
+  ],
+  "paths": {
+    "/api/v1/health": {
+      "get": {
+        "operationId": "getHealth",
+        "summary": "Inspect process/configuration status; does not prove investigation correctness",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Health"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/v1/capabilities": {
+      "get": {
+        "operationId": "getCapabilities",
+        "summary": "Read effective configured capabilities and session anti-CSRF value",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Capabilities"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/incidents": {
+      "get": {
+        "operationId": "listIncidents",
+        "summary": "Read cursor-paginated authorized incident records",
+        "parameters": [
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "schema_version": {
+                      "const": "autotriager.api.v1"
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Incident"
+                      },
+                      "minItems": 0,
+                      "maxItems": 100
+                    },
+                    "next_cursor": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 512
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "schema_version",
+                    "items",
+                    "next_cursor"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/investigations": {
+      "get": {
+        "operationId": "listInvestigations",
+        "summary": "Read cursor-paginated authorized investigation records",
+        "parameters": [
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "schema_version": {
+                      "const": "autotriager.api.v1"
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Investigation"
+                      },
+                      "minItems": 0,
+                      "maxItems": 100
+                    },
+                    "next_cursor": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 512
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "schema_version",
+                    "items",
+                    "next_cursor"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createInvestigation",
+        "summary": "Create an investigation for one admissible incident",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "name": "Origin",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInvestigation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created, or exact idempotent replay of a prior creation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Investigation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/incidents/{incident_id}": {
+      "parameters": [
+        {
+          "name": "incident_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          }
+        }
+      ],
+      "get": {
+        "operationId": "getIncident",
+        "summary": "Read an authorized incident",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Incident"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/investigations/{investigation_id}": {
+      "parameters": [
+        {
+          "name": "investigation_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          }
+        }
+      ],
+      "get": {
+        "operationId": "getInvestigation",
+        "summary": "Read an authorized investigation",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Investigation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/runs/{run_id}": {
+      "parameters": [
+        {
+          "name": "run_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          }
+        }
+      ],
+      "get": {
+        "operationId": "getRun",
+        "summary": "Read an authorized run",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Run"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/investigations/{investigation_id}/runs": {
+      "parameters": [
+        {
+          "name": "investigation_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          }
+        }
+      ],
+      "post": {
+        "operationId": "createRun",
+        "summary": "Create an immutable run attempt; model, scope, budget and history are server-owned",
+        "description": "Offline inference with missing model configuration or authorization returns HTTP 409 before dispatch and creates no billable attempt. Fixture mode does not call a provider. Same idempotency key/body replays the same run; a changed body conflicts. A parent must belong to this investigation and be terminal.",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "name": "Origin",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRun"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted run or exact idempotent replay. May remain queued while an earlier provider dispatch is unresolved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Run"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "listInvestigationRuns",
+        "summary": "List every owned investigation run and follow-up branch in stable created_at,run_id order",
+        "parameters": [
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "schema_version": {
+                      "const": "autotriager.api.v1"
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Run"
+                      },
+                      "minItems": 0,
+                      "maxItems": 100
+                    },
+                    "next_cursor": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 512
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "schema_version",
+                    "items",
+                    "next_cursor"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/runs/{run_id}/events": {
+      "parameters": [
+        {
+          "name": "run_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          }
+        }
+      ],
+      "get": {
+        "operationId": "streamRunEvents",
+        "summary": "Replay and tail the application's durable event journal",
+        "description": "Each frame is event: <event_type>, id: <sequence>, data: <Event JSON>. This is not a Holmes replay API. The client may supply after or Last-Event-ID; if both are set they must agree. Initial cursor 0 replays from the beginning. Disconnect never triggers another model request. Heartbeats are SSE comments without sequence advancement. Cursor errors are sent before starting SSE. Full MVP journals are retained; a future retention gap must return STREAM_CURSOR_EXPIRED rather than silently omitting events.",
+        "parameters": [
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          {
+            "name": "Last-Event-ID",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-9]+$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SSE stream containing versioned Event envelopes. Terminal runs replay to EOF; an empty tail does not change run state.",
+            "content": {
+              "text/event-stream": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "event: tool.started\nid: 7\ndata: {\"schema_version\":\"autotriager.api.v1\",\"event_id\":\"evt_example\",\"run_id\":\"run_example\",\"sequence\":7,\"received_at\":\"2026-01-01T00:00:00Z\",\"upstream_observed_at\":null,\"event_type\":\"tool.started\",\"upstream_call_id\":\"call_example\",\"payload\":{\"query_id\":\"query_example\",\"tool_name\":\"incident_metrics\"}}\n\n"
+              }
+            }
+          },
+          "400": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-event-envelope": {
+          "$ref": "#/components/schemas/Event"
+        }
+      }
+    },
+    "/api/v1/runs/{run_id}/evidence/{evidence_id}": {
+      "parameters": [
+        {
+          "name": "run_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          }
+        },
+        {
+          "name": "evidence_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          }
+        }
+      ],
+      "get": {
+        "operationId": "getEvidence",
+        "summary": "Read retained evidence under local-user authorization, independent of expired engine capability",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Evidence"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/runs/{run_id}/cancel": {
+      "parameters": [
+        {
+          "name": "run_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          }
+        }
+      ],
+      "post": {
+        "operationId": "cancelRun",
+        "summary": "Fence logical run execution; does not promise remote provider termination",
+        "description": "Idempotent for repeated cancel requests. No body. Cancel is not an approval of any suggested remediation. Historical evidence remains readable to the authorized user. An unresolved external dispatch keeps its global slot and reservation after logical cancellation.",
+        "parameters": [
+          {
+            "name": "Origin",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Current cancellation receipt, including possible remaining external work.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelReceipt"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/runs/{run_id}/queries/{query_id}": {
+      "parameters": [
+        {
+          "name": "run_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          }
+        },
+        {
+          "name": "query_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          }
+        }
+      ],
+      "get": {
+        "operationId": "getRunQuery",
+        "summary": "Retrieve the scoped safe query request and nullable persisted result",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QueryDetail"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Safe typed error. No credentials, raw filesystem paths or evaluator labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "localSession": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "at_session",
+        "description": "Application-controlled local session. Not an enterprise login/RBAC implementation. HttpOnly, SameSite=Strict; Secure flag when HTTPS is deployed."
+      }
+    },
+    "schemas": {
+      "TimeWindow": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "end": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "start",
+          "end"
+        ],
+        "additionalProperties": false
+      },
+      "ModalitySummary": {
+        "type": "object",
+        "properties": {
+          "availability": {
+            "type": "string",
+            "enum": [
+              "present",
+              "absent",
+              "unknown"
+            ]
+          },
+          "record_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "original_timestamp_unit": {
+            "type": "string",
+            "enum": [
+              "unix_s",
+              "unix_ms",
+              "unix_us",
+              "unix_ns",
+              "iso8601",
+              "unknown"
+            ]
+          },
+          "value_units": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80
+            },
+            "minItems": 0,
+            "maxItems": 256
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "availability",
+          "record_count",
+          "original_timestamp_unit",
+          "value_units",
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "Incident": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "autotriager.api.v1"
+          },
+          "incident_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "system_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "display_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "fixture",
+              "offline_replay"
+            ]
+          },
+          "data_revision": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "manifest_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "time_window": {
+            "$ref": "#/components/schemas/TimeWindow"
+          },
+          "normalized_timestamp_unit": {
+            "const": "iso8601_utc"
+          },
+          "service_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "minItems": 1,
+            "maxItems": 5000,
+            "uniqueItems": true
+          },
+          "modalities": {
+            "type": "object",
+            "properties": {
+              "metrics": {
+                "$ref": "#/components/schemas/ModalitySummary"
+              },
+              "logs": {
+                "$ref": "#/components/schemas/ModalitySummary"
+              },
+              "traces": {
+                "$ref": "#/components/schemas/ModalitySummary"
+              }
+            },
+            "required": [
+              "metrics",
+              "logs",
+              "traces"
+            ],
+            "additionalProperties": false
+          },
+          "coverage_warnings": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            "minItems": 0,
+            "maxItems": 100
+          }
+        },
+        "required": [
+          "schema_version",
+          "incident_id",
+          "system_id",
+          "display_name",
+          "mode",
+          "data_revision",
+          "manifest_digest",
+          "time_window",
+          "normalized_timestamp_unit",
+          "service_ids",
+          "modalities",
+          "coverage_warnings"
+        ],
+        "additionalProperties": false
+      },
+      "Budget": {
+        "type": "object",
+        "properties": {
+          "max_model_calls": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10000
+          },
+          "max_tool_calls": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100000
+          },
+          "max_source_bytes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1073741824
+          },
+          "max_output_tokens": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000
+          },
+          "max_wall_time_seconds": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 86400
+          },
+          "paid_fallback_allowed": {
+            "const": false
+          },
+          "max_total_rows": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1073741824
+          },
+          "max_total_input_tokens": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1073741824
+          },
+          "max_total_output_tokens": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1073741824
+          }
+        },
+        "required": [
+          "max_model_calls",
+          "max_tool_calls",
+          "max_source_bytes",
+          "max_output_tokens",
+          "max_wall_time_seconds",
+          "paid_fallback_allowed",
+          "max_total_rows",
+          "max_total_input_tokens",
+          "max_total_output_tokens"
+        ],
+        "additionalProperties": false
+      },
+      "RunConfig": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "autotriager.api.v1"
+          },
+          "run_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "incident_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "fixture",
+              "offline_replay"
+            ]
+          },
+          "incident_manifest_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "data_revision": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "engine_source_commit": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{40}$"
+          },
+          "engine_build_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "adapter_version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "model_key": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "resolved_model_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "policy_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "policy_version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "policy_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "config_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "inference_authorized": {
+            "type": "boolean"
+          },
+          "grant_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{1,96}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "grant_expires_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "budget": {
+            "$ref": "#/components/schemas/Budget"
+          }
+        },
+        "required": [
+          "schema_version",
+          "run_id",
+          "incident_id",
+          "mode",
+          "incident_manifest_digest",
+          "data_revision",
+          "engine_source_commit",
+          "engine_build_id",
+          "adapter_version",
+          "model_key",
+          "resolved_model_id",
+          "policy_id",
+          "policy_version",
+          "policy_digest",
+          "config_digest",
+          "inference_authorized",
+          "grant_id",
+          "grant_expires_at",
+          "budget"
+        ],
+        "additionalProperties": false
+      },
+      "Investigation": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "autotriager.api.v1"
+          },
+          "investigation_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "incident_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "latest_run_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{1,96}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "schema_version",
+          "investigation_id",
+          "incident_id",
+          "title",
+          "created_at",
+          "updated_at",
+          "latest_run_id"
+        ],
+        "additionalProperties": false
+      },
+      "CreateInvestigation": {
+        "type": "object",
+        "properties": {
+          "incident_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        },
+        "required": [
+          "incident_id"
+        ],
+        "additionalProperties": false
+      },
+      "CreateRun": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 8000
+          },
+          "parent_run_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{1,96}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "policy_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          }
+        },
+        "required": [
+          "question"
+        ],
+        "additionalProperties": false
+      },
+      "Candidate": {
+        "type": "object",
+        "properties": {
+          "rank": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5000
+          },
+          "service_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "hypothesis": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 8000
+          },
+          "supporting_evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,96}$"
+            },
+            "minItems": 0,
+            "maxItems": 1000,
+            "uniqueItems": true
+          },
+          "contradicting_evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,96}$"
+            },
+            "minItems": 0,
+            "maxItems": 1000,
+            "uniqueItems": true
+          },
+          "missing_checks": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            "minItems": 0,
+            "maxItems": 100
+          }
+        },
+        "required": [
+          "rank",
+          "service_id",
+          "hypothesis",
+          "supporting_evidence_ids",
+          "contradicting_evidence_ids",
+          "missing_checks"
+        ],
+        "additionalProperties": false
+      },
+      "Observation": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,96}$"
+            },
+            "minItems": 1,
+            "maxItems": 1000,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "text",
+          "evidence_ids"
+        ],
+        "additionalProperties": false
+      },
+      "ModelAnswer": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "autotriager.api.v1"
+          },
+          "run_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "incident_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ranked_candidates",
+              "insufficient_evidence"
+            ]
+          },
+          "candidates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Candidate"
+            },
+            "minItems": 0,
+            "maxItems": 5000
+          },
+          "observations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Observation"
+            },
+            "minItems": 0,
+            "maxItems": 1000
+          },
+          "unknowns": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "next_checks": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000
+            },
+            "minItems": 0,
+            "maxItems": 100
+          }
+        },
+        "required": [
+          "schema_version",
+          "run_id",
+          "incident_id",
+          "status",
+          "candidates",
+          "observations",
+          "unknowns",
+          "next_checks"
+        ],
+        "additionalProperties": false
+      },
+      "Answer": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "autotriager.api.v1"
+          },
+          "answer_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "run_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "incident_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ranked_candidates",
+              "insufficient_evidence"
+            ]
+          },
+          "candidates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Candidate"
+            },
+            "minItems": 0,
+            "maxItems": 5000
+          },
+          "observations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Observation"
+            },
+            "minItems": 0,
+            "maxItems": 1000
+          },
+          "unknowns": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "next_checks": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "raw_output_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "structure_valid": {
+            "const": true
+          },
+          "reference_valid": {
+            "const": true
+          },
+          "semantic_support_status": {
+            "const": "not_assessed"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "schema_version",
+          "answer_id",
+          "run_id",
+          "incident_id",
+          "status",
+          "candidates",
+          "observations",
+          "unknowns",
+          "next_checks",
+          "raw_output_digest",
+          "structure_valid",
+          "reference_valid",
+          "semantic_support_status",
+          "created_at"
+        ],
+        "additionalProperties": false
+      },
+      "Run": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "autotriager.api.v1"
+          },
+          "run_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "investigation_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "incident_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "parent_run_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{1,96}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "fixture",
+              "offline_replay"
+            ]
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "CREATED",
+              "QUEUED",
+              "RUNNING",
+              "VALIDATING",
+              "COMPLETED",
+              "FAILED",
+              "TIMED_OUT",
+              "BUDGET_EXHAUSTED",
+              "CANCEL_REQUESTED",
+              "CANCELLED"
+            ]
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "run_generation": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "config_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "last_sequence": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "termination_code": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "remote_stop_status": {
+            "type": "string",
+            "enum": [
+              "not_dispatched",
+              "pending",
+              "unknown",
+              "observed_stopped",
+              "observed_completed"
+            ]
+          },
+          "config": {
+            "$ref": "#/components/schemas/RunConfig"
+          },
+          "answer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Answer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 8000
+          }
+        },
+        "required": [
+          "schema_version",
+          "run_id",
+          "investigation_id",
+          "incident_id",
+          "parent_run_id",
+          "mode",
+          "state",
+          "revision",
+          "run_generation",
+          "config_digest",
+          "created_at",
+          "updated_at",
+          "last_sequence",
+          "termination_code",
+          "remote_stop_status",
+          "config",
+          "answer",
+          "question"
+        ],
+        "additionalProperties": false
+      },
+      "ToolQuery": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "autotriager.api.v1"
+          },
+          "query_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "run_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "incident_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "tool_name": {
+            "type": "string",
+            "enum": [
+              "incident_manifest",
+              "incident_services",
+              "incident_metrics",
+              "incident_logs",
+              "incident_traces"
+            ]
+          },
+          "modality": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "metrics",
+                  "logs",
+                  "traces"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "time_window": {
+            "$ref": "#/components/schemas/TimeWindow"
+          },
+          "service_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "minItems": 0,
+            "maxItems": 5000,
+            "uniqueItems": true
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2000
+          },
+          "max_bytes": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1048576
+          },
+          "parameters": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "schema_version",
+          "query_id",
+          "run_id",
+          "incident_id",
+          "tool_name",
+          "modality",
+          "time_window",
+          "service_ids",
+          "limit",
+          "max_bytes",
+          "parameters"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "tool_name": {
+                  "const": "incident_manifest"
+                }
+              },
+              "required": [
+                "tool_name"
+              ]
+            },
+            "then": {
+              "properties": {
+                "parameters": {
+                  "type": "object",
+                  "properties": {},
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "tool_name": {
+                  "const": "incident_services"
+                }
+              },
+              "required": [
+                "tool_name"
+              ]
+            },
+            "then": {
+              "properties": {
+                "parameters": {
+                  "type": "object",
+                  "properties": {},
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "tool_name": {
+                  "const": "incident_metrics"
+                }
+              },
+              "required": [
+                "tool_name"
+              ]
+            },
+            "then": {
+              "properties": {
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "metric_names": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 128
+                      },
+                      "uniqueItems": true,
+                      "maxItems": 64
+                    },
+                    "aggregation": {
+                      "type": "string",
+                      "enum": [
+                        "none",
+                        "mean",
+                        "max",
+                        "p95"
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "tool_name": {
+                  "const": "incident_logs"
+                }
+              },
+              "required": [
+                "tool_name"
+              ]
+            },
+            "then": {
+              "properties": {
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "contains": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 256
+                    },
+                    "severity": {
+                      "type": "string",
+                      "enum": [
+                        "debug",
+                        "info",
+                        "warning",
+                        "error",
+                        "critical"
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "tool_name": {
+                  "const": "incident_traces"
+                }
+              },
+              "required": [
+                "tool_name"
+              ]
+            },
+            "then": {
+              "properties": {
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "trace_id": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,96}$"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "any",
+                        "ok",
+                        "error"
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        ]
+      },
+      "QueryResult": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "autotriager.api.v1"
+          },
+          "query_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "run_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "incident_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "modality_absent",
+              "no_match",
+              "truncated",
+              "error",
+              "scope_denied",
+              "budget_exhausted",
+              "cancelled"
+            ]
+          },
+          "availability": {
+            "type": "string",
+            "enum": [
+              "present",
+              "absent",
+              "unknown"
+            ]
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,96}$"
+            },
+            "minItems": 0,
+            "maxItems": 2000,
+            "uniqueItems": true
+          },
+          "returned_count": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2000
+          },
+          "matched_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "truncated": {
+            "type": "boolean"
+          },
+          "result_complete": {
+            "type": "boolean"
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "message": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 2000
+                  }
+                },
+                "required": [
+                  "code",
+                  "message"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "schema_version",
+          "query_id",
+          "run_id",
+          "incident_id",
+          "status",
+          "availability",
+          "evidence_ids",
+          "returned_count",
+          "matched_count",
+          "truncated",
+          "result_complete",
+          "limitations",
+          "error"
+        ],
+        "additionalProperties": false
+      },
+      "Derivation": {
+        "type": "object",
+        "properties": {
+          "parent_evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,96}$"
+            },
+            "minItems": 1,
+            "maxItems": 2000,
+            "uniqueItems": true
+          },
+          "method_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "method_version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "missing_value_policy": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "unit": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          }
+        },
+        "required": [
+          "parent_evidence_ids",
+          "method_id",
+          "method_version",
+          "missing_value_policy",
+          "unit"
+        ],
+        "additionalProperties": false
+      },
+      "Evidence": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "autotriager.api.v1"
+          },
+          "evidence_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "run_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "incident_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "query_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "service_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "modality": {
+            "type": "string",
+            "enum": [
+              "metrics",
+              "logs",
+              "traces"
+            ]
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "raw",
+              "derived"
+            ]
+          },
+          "source_artifact_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "record_locator": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "content_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "observed_window": {
+            "$ref": "#/components/schemas/TimeWindow"
+          },
+          "preserved_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "unit": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "record": {
+            "type": "object"
+          },
+          "derivation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Derivation"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            "minItems": 0,
+            "maxItems": 100
+          }
+        },
+        "required": [
+          "schema_version",
+          "evidence_id",
+          "run_id",
+          "incident_id",
+          "query_id",
+          "service_id",
+          "modality",
+          "kind",
+          "source_artifact_digest",
+          "record_locator",
+          "content_digest",
+          "observed_window",
+          "preserved_at",
+          "unit",
+          "record",
+          "derivation",
+          "limitations"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "derived"
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "properties": {
+                "derivation": {
+                  "$ref": "#/components/schemas/Derivation"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "derivation": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "RunStatePayload": {
+        "type": "object",
+        "properties": {
+          "from_state": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "CREATED",
+                  "QUEUED",
+                  "RUNNING",
+                  "VALIDATING",
+                  "COMPLETED",
+                  "FAILED",
+                  "TIMED_OUT",
+                  "BUDGET_EXHAUSTED",
+                  "CANCEL_REQUESTED",
+                  "CANCELLED"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "to_state": {
+            "type": "string",
+            "enum": [
+              "CREATED",
+              "QUEUED",
+              "RUNNING",
+              "VALIDATING",
+              "COMPLETED",
+              "FAILED",
+              "TIMED_OUT",
+              "BUDGET_EXHAUSTED",
+              "CANCEL_REQUESTED",
+              "CANCELLED"
+            ]
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "from_state",
+          "to_state",
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "ToolStartedPayload": {
+        "type": "object",
+        "properties": {
+          "query_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "tool_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        },
+        "required": [
+          "query_id",
+          "tool_name"
+        ],
+        "additionalProperties": false
+      },
+      "ToolFinishedPayload": {
+        "type": "object",
+        "properties": {
+          "query_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "modality_absent",
+              "no_match",
+              "truncated",
+              "error",
+              "scope_denied",
+              "budget_exhausted",
+              "cancelled"
+            ]
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,96}$"
+            },
+            "minItems": 0,
+            "maxItems": 2000,
+            "uniqueItems": true
+          },
+          "returned_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "truncated": {
+            "type": "boolean"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "query_id",
+          "status",
+          "evidence_ids",
+          "returned_count",
+          "truncated",
+          "error"
+        ],
+        "additionalProperties": false
+      },
+      "EvidenceAddedPayload": {
+        "type": "object",
+        "properties": {
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,96}$"
+            },
+            "minItems": 1,
+            "maxItems": 2000,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "evidence_ids"
+        ],
+        "additionalProperties": false
+      },
+      "AnswerReceivedPayload": {
+        "type": "object",
+        "properties": {
+          "answer_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "output_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "required": [
+          "answer_id",
+          "output_digest"
+        ],
+        "additionalProperties": false
+      },
+      "ValidationFinishedPayload": {
+        "type": "object",
+        "properties": {
+          "structure_valid": {
+            "type": "boolean"
+          },
+          "reference_valid": {
+            "type": "boolean"
+          },
+          "issues": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            "minItems": 0,
+            "maxItems": 100
+          }
+        },
+        "required": [
+          "structure_valid",
+          "reference_valid",
+          "issues"
+        ],
+        "additionalProperties": false
+      },
+      "UsageObservedPayload": {
+        "type": "object",
+        "properties": {
+          "model_calls": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tool_calls": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "input_tokens": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "output_tokens": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "provider_cost_usd": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "accounting_status": {
+            "type": "string",
+            "enum": [
+              "partial",
+              "observed"
+            ]
+          }
+        },
+        "required": [
+          "model_calls",
+          "tool_calls",
+          "input_tokens",
+          "output_tokens",
+          "provider_cost_usd",
+          "accounting_status"
+        ],
+        "additionalProperties": false
+      },
+      "WarningPayload": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "additionalProperties": false
+      },
+      "LateObservationPayload": {
+        "type": "object",
+        "properties": {
+          "raw_event_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "original_event_type": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "raw_event_digest",
+          "original_event_type",
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "Event": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "autotriager.api.v1"
+          },
+          "event_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "run_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "sequence": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "received_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "upstream_observed_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "event_type": {
+            "type": "string",
+            "enum": [
+              "run.state_changed",
+              "tool.started",
+              "tool.finished",
+              "evidence.added",
+              "answer.received",
+              "validation.finished",
+              "usage.observed",
+              "warning",
+              "late_observation"
+            ]
+          },
+          "upstream_call_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{1,96}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "payload": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "schema_version",
+          "event_id",
+          "run_id",
+          "sequence",
+          "received_at",
+          "upstream_observed_at",
+          "event_type",
+          "upstream_call_id",
+          "payload"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "event_type": {
+                  "const": "run.state_changed"
+                }
+              },
+              "required": [
+                "event_type"
+              ]
+            },
+            "then": {
+              "properties": {
+                "payload": {
+                  "$ref": "#/components/schemas/RunStatePayload"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "event_type": {
+                  "const": "tool.started"
+                }
+              },
+              "required": [
+                "event_type"
+              ]
+            },
+            "then": {
+              "properties": {
+                "payload": {
+                  "$ref": "#/components/schemas/ToolStartedPayload"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "event_type": {
+                  "const": "tool.finished"
+                }
+              },
+              "required": [
+                "event_type"
+              ]
+            },
+            "then": {
+              "properties": {
+                "payload": {
+                  "$ref": "#/components/schemas/ToolFinishedPayload"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "event_type": {
+                  "const": "evidence.added"
+                }
+              },
+              "required": [
+                "event_type"
+              ]
+            },
+            "then": {
+              "properties": {
+                "payload": {
+                  "$ref": "#/components/schemas/EvidenceAddedPayload"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "event_type": {
+                  "const": "answer.received"
+                }
+              },
+              "required": [
+                "event_type"
+              ]
+            },
+            "then": {
+              "properties": {
+                "payload": {
+                  "$ref": "#/components/schemas/AnswerReceivedPayload"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "event_type": {
+                  "const": "validation.finished"
+                }
+              },
+              "required": [
+                "event_type"
+              ]
+            },
+            "then": {
+              "properties": {
+                "payload": {
+                  "$ref": "#/components/schemas/ValidationFinishedPayload"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "event_type": {
+                  "const": "usage.observed"
+                }
+              },
+              "required": [
+                "event_type"
+              ]
+            },
+            "then": {
+              "properties": {
+                "payload": {
+                  "$ref": "#/components/schemas/UsageObservedPayload"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "event_type": {
+                  "const": "warning"
+                }
+              },
+              "required": [
+                "event_type"
+              ]
+            },
+            "then": {
+              "properties": {
+                "payload": {
+                  "$ref": "#/components/schemas/WarningPayload"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "event_type": {
+                  "const": "late_observation"
+                }
+              },
+              "required": [
+                "event_type"
+              ]
+            },
+            "then": {
+              "properties": {
+                "payload": {
+                  "$ref": "#/components/schemas/LateObservationPayload"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "ProviderDispatchReservation": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "autotriager.api.v1"
+          },
+          "dispatch_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "run_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "engine_request",
+              "provider_request"
+            ]
+          },
+          "parent_dispatch_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{1,96}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "slot_name": {
+            "type": "string",
+            "enum": [
+              "engine_investigation",
+              "model_provider"
+            ]
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "RESERVED",
+              "DISPATCHED",
+              "UNRESOLVED",
+              "COMPLETION_OBSERVED"
+            ]
+          },
+          "calls_reserved": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dispatched_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "completed_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "provider_request_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "budget_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "reserved_input_tokens": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1073741824
+          },
+          "reserved_output_tokens": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1073741824
+          },
+          "grant_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{1,96}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "schema_version",
+          "dispatch_id",
+          "run_id",
+          "kind",
+          "parent_dispatch_id",
+          "slot_name",
+          "state",
+          "calls_reserved",
+          "created_at",
+          "dispatched_at",
+          "completed_at",
+          "provider_request_id",
+          "budget_digest",
+          "reserved_input_tokens",
+          "reserved_output_tokens",
+          "grant_id"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "provider_request"
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "properties": {
+                "grant_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "parent_dispatch_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "calls_reserved": {
+                  "const": 1
+                },
+                "slot_name": {
+                  "const": "model_provider"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "engine_request"
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "properties": {
+                "grant_id": {
+                  "type": "null"
+                },
+                "parent_dispatch_id": {
+                  "type": "null"
+                },
+                "calls_reserved": {
+                  "const": 0
+                },
+                "slot_name": {
+                  "const": "engine_investigation"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "Review": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "autotriager.api.v1"
+          },
+          "review_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "run_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "answer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{1,96}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reviewer_kind": {
+            "const": "local_user"
+          },
+          "verdict": {
+            "type": "string",
+            "enum": [
+              "supported",
+              "needs_revision",
+              "cannot_judge"
+            ]
+          },
+          "notes": {
+            "type": "string",
+            "maxLength": 8000
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "schema_version",
+          "review_id",
+          "run_id",
+          "answer_id",
+          "reviewer_kind",
+          "verdict",
+          "notes",
+          "created_at"
+        ],
+        "additionalProperties": false
+      },
+      "Idempotency": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "autotriager.api.v1"
+          },
+          "scope": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "route": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "request_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "resource_type": {
+            "type": "string",
+            "enum": [
+              "investigation",
+              "run"
+            ]
+          },
+          "resource_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "response_status": {
+            "type": "integer",
+            "enum": [
+              201,
+              202
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "schema_version",
+          "scope",
+          "route",
+          "key",
+          "request_digest",
+          "resource_type",
+          "resource_id",
+          "response_status",
+          "created_at"
+        ],
+        "additionalProperties": false
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "autotriager.api.v1"
+          },
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "enum": [
+                  "INVALID_REQUEST",
+                  "UNAUTHENTICATED",
+                  "ORIGIN_DENIED",
+                  "CSRF_FAILED",
+                  "NOT_FOUND",
+                  "SCOPE_DENIED",
+                  "IDEMPOTENCY_CONFLICT",
+                  "CONFIGURATION_NOT_READY",
+                  "INFERENCE_NOT_AUTHORIZED",
+                  "BUDGET_UNAVAILABLE",
+                  "PARENT_SCOPE_MISMATCH",
+                  "INVALID_CURSOR",
+                  "STREAM_CURSOR_EXPIRED",
+                  "CONFLICT",
+                  "INTERNAL_ERROR"
+                ]
+              },
+              "message": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "details": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "field": {
+                      "type": "string",
+                      "maxLength": 256
+                    },
+                    "reason": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 2000
+                    }
+                  },
+                  "required": [
+                    "field",
+                    "reason"
+                  ],
+                  "additionalProperties": false
+                },
+                "minItems": 0,
+                "maxItems": 100
+              },
+              "retryable": {
+                "type": "boolean"
+              },
+              "correlation_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{1,96}$"
+              },
+              "run_id": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_-]{1,96}$"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "code",
+              "message",
+              "details",
+              "retryable",
+              "correlation_id",
+              "run_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "schema_version",
+          "error"
+        ],
+        "additionalProperties": false
+      },
+      "Health": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "autotriager.api.v1"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok",
+              "degraded"
+            ]
+          },
+          "application_status": {
+            "type": "string",
+            "enum": [
+              "ready",
+              "starting"
+            ]
+          },
+          "store_status": {
+            "type": "string",
+            "enum": [
+              "ready",
+              "unavailable"
+            ]
+          },
+          "engine_status": {
+            "type": "string",
+            "enum": [
+              "not_configured",
+              "not_checked",
+              "ready",
+              "unavailable"
+            ]
+          }
+        },
+        "required": [
+          "schema_version",
+          "status",
+          "application_status",
+          "store_status",
+          "engine_status"
+        ],
+        "additionalProperties": false
+      },
+      "Capabilities": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "autotriager.api.v1"
+          },
+          "modes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "fixture",
+                "offline_replay"
+              ]
+            },
+            "minItems": 1,
+            "maxItems": 2,
+            "uniqueItems": true
+          },
+          "live_mode_supported": {
+            "const": false
+          },
+          "engine_source_commit": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{40}$"
+          },
+          "engine_runtime_verified": {
+            "type": "boolean"
+          },
+          "model_configured": {
+            "type": "boolean"
+          },
+          "model_key": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "resolved_model_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "free_tier_status": {
+            "type": "string",
+            "enum": [
+              "unverified",
+              "account_checked"
+            ]
+          },
+          "inference_authorized": {
+            "type": "boolean"
+          },
+          "budget": {
+            "$ref": "#/components/schemas/Budget"
+          },
+          "allowed_policy_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80
+            },
+            "minItems": 1,
+            "maxItems": 100,
+            "uniqueItems": true
+          },
+          "operations_views": { "type": "boolean" },
+          "pending_gates": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "csrf_token": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        },
+        "required": [
+          "schema_version",
+          "modes",
+          "live_mode_supported",
+          "engine_source_commit",
+          "engine_runtime_verified",
+          "model_configured",
+          "model_key",
+          "resolved_model_id",
+          "free_tier_status",
+          "inference_authorized",
+          "budget",
+          "allowed_policy_ids",
+          "pending_gates",
+          "csrf_token"
+        ],
+        "additionalProperties": false
+      },
+      "CancelReceipt": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "autotriager.api.v1"
+          },
+          "run_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "CREATED",
+              "QUEUED",
+              "RUNNING",
+              "VALIDATING",
+              "COMPLETED",
+              "FAILED",
+              "TIMED_OUT",
+              "BUDGET_EXHAUSTED",
+              "CANCEL_REQUESTED",
+              "CANCELLED"
+            ]
+          },
+          "logical_fence_active": {
+            "type": "boolean"
+          },
+          "provider_dispatch_pending": {
+            "type": "boolean"
+          },
+          "remote_stop_status": {
+            "type": "string",
+            "enum": [
+              "not_dispatched",
+              "pending",
+              "unknown",
+              "observed_stopped",
+              "observed_completed"
+            ]
+          },
+          "billing_may_continue": {
+            "type": "boolean"
+          },
+          "last_sequence": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "schema_version",
+          "run_id",
+          "state",
+          "logical_fence_active",
+          "provider_dispatch_pending",
+          "remote_stop_status",
+          "billing_may_continue",
+          "last_sequence"
+        ],
+        "additionalProperties": false
+      },
+      "CursorPage": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "additionalProperties": false
+      },
+      "ExamplesBundle": {
+        "type": "object",
+        "properties": {
+          "artifact_kind": {
+            "const": "synthetic_contract_examples_not_benchmark"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "objects": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "schema": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "value": {}
+              },
+              "required": [
+                "schema",
+                "value"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "maxItems": 1000
+          }
+        },
+        "required": [
+          "artifact_kind",
+          "description",
+          "objects"
+        ],
+        "additionalProperties": false
+      },
+      "QueryDetail": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "autotriager.api.v1"
+          },
+          "query": {
+            "$ref": "#/components/schemas/ToolQuery"
+          },
+          "result": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/QueryResult"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "schema_version",
+          "query",
+          "result"
+        ],
+        "additionalProperties": false
+      },
+      "ToolReply": {
+        "type": "object",
+        "description": "Private read-only gateway materialization; not a browser HTTP route. Contains actual admitted records, not just evidence IDs. Entire serialized payload is scoped, persisted and charged before return.",
+        "properties": {
+          "schema_version": {
+            "const": "autotriager.api.v1"
+          },
+          "query": {
+            "$ref": "#/components/schemas/ToolQuery"
+          },
+          "result": {
+            "$ref": "#/components/schemas/QueryResult"
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "maxItems": 2000
+          },
+          "manifest": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Incident"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "service_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "uniqueItems": true,
+            "maxItems": 2000
+          }
+        },
+        "required": [
+          "schema_version",
+          "query",
+          "result",
+          "evidence",
+          "manifest",
+          "service_ids"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+}

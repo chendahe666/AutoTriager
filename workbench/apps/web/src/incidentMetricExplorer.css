@@ -1,0 +1,96 @@
+.metric-explorer {
+  margin-top: 14px;
+  border: 1px solid #cfdae5;
+  border-radius: 7px;
+  color: #233c51;
+  background: #f8fbfd;
+}
+
+.metric-explorer > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 13px;
+  cursor: pointer;
+  list-style: none;
+  color: #1d4e70;
+}
+
+.metric-explorer > summary::-webkit-details-marker { display: none; }
+.metric-explorer > summary:hover { background: #ebf3f9; }
+.metric-explorer > summary > span:first-child { display: grid; gap: 3px; }
+.metric-explorer > summary strong { font-size: 13px; }
+.metric-explorer > summary small { color: #50687a; font-size: 11px; }
+.metric-explorer > summary:focus-visible, .metric-explorer input:focus-visible, .metric-explorer button:focus-visible {
+  outline: 2px solid #0e6fa7;
+  outline-offset: 2px;
+}
+.metric-explorer-chevron { font-size: 21px; line-height: 1; }
+.metric-explorer[open] .metric-explorer-chevron { transform: rotate(90deg); }
+.metric-explorer-body { display: grid; gap: 13px; padding: 14px; border-top: 1px solid #d7e2eb; }
+.metric-explorer-window, .metric-explorer-cursor { display: flex; align-items: center; gap: 7px 12px; flex-wrap: wrap; font-size: 12px; }
+.metric-explorer-window > span, .metric-explorer-axis, .metric-explorer-provenance { color: #526b80; }
+.metric-explorer-window > strong, .metric-explorer-cursor time, .metric-explorer-axis { font-variant-numeric: tabular-nums; }
+.metric-explorer-window > .metric-explorer-alert-key { color: #933e2f; }
+.metric-explorer-alert-key::before { content: ''; display: inline-block; width: 8px; margin-right: 4px; border-top: 2px dashed #a94433; vertical-align: middle; }
+.metric-explorer-cursor { padding: 9px 10px; background: #edf4f8; border-radius: 5px; }
+.metric-explorer-cursor label { font-weight: 600; }
+.metric-explorer-cursor input { flex: 1; min-width: 90px; accent-color: #176a95; }
+.metric-explorer-state { margin: 0; color: #526b80; font-size: 12px; }
+.metric-explorer-state button { display: block; margin-top: 8px; padding: 4px 8px; color: #1c597c; background: #fff; border: 1px solid #cad8e4; border-radius: 4px; }
+.metric-explorer-group h4 { margin: 2px 0 8px; color: #263e54; font-size: 14px; }
+.metric-explorer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(290px, 100%), 1fr)); gap: 10px; }
+.metric-explorer-chart { min-width: 0; padding: 10px 12px 9px; background: #fff; border: 1px solid #dbe4ed; border-radius: 5px; }
+.metric-explorer-chart > header { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; min-height: 35px; }
+.metric-explorer-chart h5 { margin: 0; color: #233c51; font-size: 13px; overflow-wrap: anywhere; }
+.metric-explorer-scope { color: #526b80; font-size: 11px; }
+.metric-explorer-reading { flex-shrink: 0; max-width: 47%; margin: 0; color: #174d71; font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; text-align: end; }
+.metric-explorer-reading span { color: #526b80; font-size: 10px; font-weight: 500; overflow-wrap: anywhere; }
+.metric-explorer-chart svg { display: block; width: 100%; height: auto; overflow: visible; cursor: crosshair; }
+.metric-explorer-chart svg text { fill: #526b80; font-family: inherit; font-size: 10px; font-variant-numeric: tabular-nums; }
+.metric-explorer-gridline, .metric-explorer-trace, .metric-explorer-alert, .metric-explorer-crosshair, .metric-explorer-threshold { vector-effect: non-scaling-stroke; }
+.metric-explorer-gridline { stroke: #e4edf4; stroke-width: 1; }
+.metric-explorer-alert, .metric-explorer-threshold { stroke: #a94433; stroke-width: 1; stroke-dasharray: 4 3; }
+.metric-explorer-threshold { opacity: .65; }
+.metric-explorer-crosshair { stroke: #507995; stroke-width: 1; stroke-dasharray: 2 2; }
+.metric-explorer-trace { fill: none; stroke: #10769d; stroke-width: 1.7; stroke-linejoin: round; stroke-linecap: round; }
+.metric-explorer-sample { fill: #10769d; stroke: #fff; stroke-width: 1.1; }
+.metric-explorer-axis { display: flex; justify-content: space-between; padding-left: 11%; padding-right: 2%; font-size: 10px; }
+.metric-explorer-provenance { margin: 5px 0 0; font-size: 10px; overflow-wrap: anywhere; }
+
+.ops-dark .metric-explorer { margin-top: 16px; border-color: #35353e; border-radius: 10px; color: #e9e9ee; background: #1b1b20; overflow: hidden; }
+.ops-dark .metric-explorer > summary { padding: 15px 17px; color: #e0dfeb; }
+.ops-dark .metric-explorer > summary:hover { background: #25252c; }
+.ops-dark .metric-explorer > summary strong { font-weight: 600; }
+.ops-dark .metric-explorer > summary small { color: #a3a3af; font-size: 11px; }
+.ops-dark .metric-explorer > summary:focus-visible, .ops-dark .metric-explorer input:focus-visible, .ops-dark .metric-explorer button:focus-visible { outline-color: #a995ff; outline-offset: -3px; }
+.ops-dark .metric-explorer-body { gap: 18px; padding: 18px; border-color: #35353e; }
+.ops-dark .metric-explorer-window > span, .ops-dark .metric-explorer-axis, .ops-dark .metric-explorer-provenance { color: #a3a3af; }
+.ops-dark .metric-explorer-window > .metric-explorer-alert-key { color: #edb094; }
+.ops-dark .metric-explorer-alert-key::before { border-color: #e4a17f; }
+.ops-dark .metric-explorer-cursor { padding: 12px; background: #26262d; border-radius: 7px; }
+.ops-dark .metric-explorer-cursor label { color: #ccccd8; font-size: 11px; }
+.ops-dark .metric-explorer-cursor input { accent-color: #b5a4f4; }
+.ops-dark .metric-explorer-state { color: #a3a3af; }
+.ops-dark .metric-explorer-state button { color: #d4cafa; background: #292930; border-color: #484851; border-radius: 6px; }
+.ops-dark .metric-explorer-group h4 { margin-bottom: 13px; color: #d3d3de; font-size: 12px; font-weight: 600; }
+.ops-dark .metric-explorer-grid { gap: 14px; }
+.ops-dark .metric-explorer-chart { padding: 15px 16px 13px; background: #151518; border-color: #303037; border-radius: 9px; }
+.ops-dark .metric-explorer-chart > header { min-height: 49px; }
+.ops-dark .metric-explorer-chart h5 { color: #e0e0ea; font-size: 12px; font-weight: 600; }
+.ops-dark .metric-explorer-scope, .ops-dark .metric-explorer-reading span { color: #aaaab7; }
+.ops-dark .metric-explorer-reading { color: #d6ccfb; font-size: 19px; font-weight: 600; letter-spacing: -.035em; }
+.ops-dark .metric-explorer-chart svg text { fill: #a3a3af; }
+.ops-dark .metric-explorer-gridline { stroke: #2c2c34; stroke-dasharray: 2 4; }
+.ops-dark .metric-explorer-alert, .ops-dark .metric-explorer-threshold { stroke: #e4a17f; }
+.ops-dark .metric-explorer-threshold { opacity: .85; }
+.ops-dark .metric-explorer-crosshair { stroke: #a7a5b5; }
+.ops-dark .metric-explorer-trace { stroke: #b5a4f4; stroke-width: 1.8; }
+.ops-dark .metric-explorer-sample { fill: #d2c4ff; stroke: #151518; stroke-width: 1.6; }
+.ops-dark .metric-explorer-provenance { line-height: 1.65; }
+
+@media (max-width: 630px) {
+  .ops-dark .metric-explorer-body { padding: 12px; }
+  .ops-dark .metric-explorer-chart { padding: 12px; }
+}

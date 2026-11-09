@@ -1,0 +1,258 @@
+.proactive-replay {
+  --replay-teal: #14736f;
+  --replay-orange: #976022;
+  --replay-caption: #526678;
+}
+
+.proactive-replay > [class*="alert"] {
+  margin-bottom: 20px;
+}
+
+.replay-result {
+  display: grid;
+  gap: 18px;
+  padding-top: 18px;
+}
+
+.replay-result .panel {
+  margin-bottom: 0;
+}
+
+.replay-summary {
+  padding: 21px 24px;
+  background: #f7fbfb;
+  border: 1px solid #cbdedd;
+  border-left: 4px solid var(--replay-teal);
+  border-radius: 3px;
+}
+
+.replay-summary h2 {
+  font-size: 20px;
+  margin: 8px 0 10px;
+}
+
+.replay-summary p {
+  margin: 8px 0;
+  line-height: 1.7;
+}
+
+.replay-source {
+  color: var(--replay-teal);
+  font-weight: 700;
+  letter-spacing: .06em;
+}
+
+.replay-scope,
+.replay-caption {
+  font-size: 12px;
+  color: var(--replay-caption);
+}
+
+.replay-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr));
+  gap: 12px;
+  margin: 16px 0 0;
+}
+
+.replay-metrics > div {
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #d8e6e5;
+}
+
+.replay-metrics dt {
+  color: var(--replay-caption);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.replay-metrics dd {
+  display: grid;
+  gap: 4px;
+  margin: 6px 0 0;
+}
+
+.replay-metrics dd > strong {
+  font-size: 17px;
+  font-variant-numeric: tabular-nums;
+}
+
+.replay-metrics dd > span {
+  color: var(--replay-caption);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.replay-chart-legend,
+.replay-event-meta,
+.replay-references {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 13px;
+}
+
+.replay-chart-legend {
+  font-size: 12px;
+  color: var(--replay-caption);
+}
+
+.replay-chart-legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.replay-chart-legend i {
+  width: 20px;
+  border-top: 2px solid;
+}
+
+.replay-chart-legend .replay-series-observed { color: var(--replay-teal); }
+.replay-chart-legend .replay-series-forecast { color: var(--blue); border-top-style: dashed; }
+.replay-chart-legend .replay-series-threshold { color: var(--replay-orange); border-top-style: dotted; }
+
+.replay-chart-scroll {
+  overflow-x: auto;
+}
+
+.replay-chart-scroll > svg {
+  display: block;
+  width: 100%;
+  min-width: 340px;
+  max-height: 270px;
+  margin: 4px auto;
+}
+
+.replay-chart-scroll text {
+  fill: var(--replay-caption);
+  font: 11px Consolas, monospace;
+}
+
+.replay-chart-grid { stroke: #dce6e9; }
+.replay-chart-scroll .replay-series-observed { fill: var(--replay-teal); stroke: var(--replay-teal); stroke-width: 2; }
+.replay-chart-scroll .replay-series-forecast { fill: #fff; stroke: var(--blue); stroke-width: 2; }
+.replay-chart-scroll .replay-series-forecast line { stroke-dasharray: 7 4; }
+.replay-chart-scroll .replay-series-threshold { stroke: var(--replay-orange); stroke-width: 1.5; stroke-dasharray: 2 4; }
+
+.replay-chart-values {
+  border-top: 1px solid var(--line);
+  margin-top: 10px;
+  padding-top: 8px;
+}
+
+.replay-investigation {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.replay-investigation > aside:focus {
+  outline: 2px solid var(--replay-teal);
+  outline-offset: 3px;
+}
+
+.replay-timeline,
+.replay-actions {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.replay-timeline > li {
+  position: relative;
+  padding: 0 0 16px 16px;
+  border-left: 2px solid #d3e2e5;
+}
+
+.replay-timeline > li:last-child {
+  padding-bottom: 1px;
+}
+
+.replay-timeline > li::before {
+  position: absolute;
+  top: 7px;
+  left: -5px;
+  width: 8px;
+  height: 8px;
+  background: var(--replay-teal);
+  border-radius: 50%;
+  content: '';
+}
+
+.replay-timeline p,
+.replay-actions p,
+.replay-evidence p {
+  margin: 6px 0;
+  overflow-wrap: anywhere;
+}
+
+.replay-event-meta > code {
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+.replay-references {
+  gap: 5px;
+}
+
+.replay-references button {
+  background: #f5f9fa;
+  border: 1px solid #c1d4da;
+  border-radius: 3px;
+  color: #255a73;
+  padding: 3px 6px;
+  font: 11px Consolas, monospace;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+.replay-references button:hover,
+.replay-references button[aria-pressed="true"] {
+  background: #dcefee;
+  border-color: #6ba5a1;
+}
+
+.replay-evidence {
+  background: #f7fbfc;
+  border-left: 2px solid #b1d0d3;
+  padding: 12px;
+  margin-top: 12px;
+}
+
+.replay-evidence h3 {
+  font-size: 13px;
+  margin: 0 0 7px;
+  overflow-wrap: anywhere;
+}
+
+.replay-evidence p {
+  font-size: 12px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
+.replay-evidence a {
+  font-size: 12px;
+}
+
+.replay-actions > li + li {
+  border-top: 1px solid var(--line);
+  margin-top: 12px;
+  padding-top: 12px;
+}
+
+.replay-actions li > div {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+@media (max-width: 1040px) {
+  .replay-investigation {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

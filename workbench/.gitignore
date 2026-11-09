@@ -1,0 +1,17 @@
+.local*/
+.venv/
+.runtime/
+.vendor/
+data/
+**/__pycache__/
+**/.pytest_cache/
+**/node_modules/
+apps/web/dist/
+apps/web/public/fonts/
+apps/web/src/font-faces.css
+*.pyc
+*.log
+*.sqlite3*
+session.key
+.env
+.env.*
