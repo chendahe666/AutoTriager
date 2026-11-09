@@ -4,6 +4,11 @@ An incident investigation workbench for on-call engineers.
 
 **Dahe Chen** · CS 5588 Data Science Capstone · University of Missouri–Kansas City
 
+## Project materials
+
+- [Watch or download the 3-minute workflow demonstration](https://github.com/chendahe666/AutoTriager/releases/download/demo-2026-11-09/AutoTriager_Live_Workflow.mp4)
+- [View the 48 × 36 inch project poster](docs/AutoTriager_Poster_48x36.pdf)
+- [English captions](https://github.com/chendahe666/AutoTriager/releases/download/demo-2026-11-09/AutoTriager_Live_Workflow.en.srt)
 ## Problem
 
 A latency alarm identifies an affected service. The engineer still needs to find which dependency to investigate, inspect the underlying measurements, and verify that a recovery action worked.
